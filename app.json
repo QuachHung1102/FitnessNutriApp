@@ -1,4 +1,7 @@
 {
   "name": "FitnessNutriApp",
-  "displayName": "FitnessNutriApp"
+  "displayName": "FitnessNutriApp",
+  "plugins": [
+    "expo-localization"
+  ]
 }

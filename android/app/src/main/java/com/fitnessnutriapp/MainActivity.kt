@@ -1,6 +1,9 @@
 package com.fitnessnutriapp
+import expo.modules.ReactActivityDelegateWrapper
 
+import android.os.Bundle;
 import com.facebook.react.ReactActivity
+import org.devio.rn.splashscreen.SplashScreen;
 import com.facebook.react.ReactActivityDelegate
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.fabricEnabled
 import com.facebook.react.defaults.DefaultReactActivityDelegate
@@ -18,5 +21,10 @@ class MainActivity : ReactActivity() {
    * which allows you to enable New Architecture with a single boolean flags [fabricEnabled]
    */
   override fun createReactActivityDelegate(): ReactActivityDelegate =
-      DefaultReactActivityDelegate(this, mainComponentName, fabricEnabled)
+      ReactActivityDelegateWrapper(this, BuildConfig.IS_NEW_ARCHITECTURE_ENABLED, DefaultReactActivityDelegate(this, mainComponentName, fabricEnabled))
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+      SplashScreen.show(this)
+      super.onCreate(savedInstanceState)
+  }
 }
