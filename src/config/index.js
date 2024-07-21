@@ -18,7 +18,7 @@ export const ConfigProvider = ({ children }) => {
     appIdentifier: `com.fitnessnutriapp.rn.${Platform.OS}`,
     facebookIdentifier: '471719465581703',
     webClientId:
-      '309397476066-5sustdh73eqntdkh5gngq10kfec2gsi4.apps.googleusercontent.com',
+      '309397476066-vvvchcvkoo5s8frns4sgqd7sb4cr4sn4.apps.googleusercontent.com',
     onboardingConfig: {
       welcomeTitle: localized('Say Hello To Your\nNew App'),
       welcomeCaption: localized(''),

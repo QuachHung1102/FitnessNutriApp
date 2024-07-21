@@ -11,6 +11,7 @@ import {
 import AppContent from './src/AppContent';
 import translations from './src/translations/';
 import { ConfigProvider } from './src/config';
+import { AuthProvider } from './src/core/onboarding/hooks/useAuth';
 
 import MobileTheme from './src/theme';
 
@@ -25,7 +26,9 @@ const App = () => {
     <TranslationProvider translations={translations}>
       <DopebaseProvider theme={theme}>
         <ConfigProvider>
-          <AppContent />
+          <AuthProvider>
+            <AppContent />
+          </AuthProvider>
         </ConfigProvider>
       </DopebaseProvider>
     </TranslationProvider>
