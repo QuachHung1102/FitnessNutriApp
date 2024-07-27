@@ -7,6 +7,7 @@ import {
   DopebaseProvider,
   extendTheme,
   TranslationProvider,
+  ActionSheetProvider,
 } from './src/core/dopebase'
 import AppContent from './src/AppContent';
 import translations from './src/translations/';
@@ -28,7 +29,11 @@ const App = () => {
       <DopebaseProvider theme={theme}>
         <ConfigProvider>
           <AuthProvider authManager={authManager}>
-            <AppContent />
+            <MenuProvider>
+              <ActionSheetProvider>
+                <AppContent />
+              </ActionSheetProvider>
+            </MenuProvider>
           </AuthProvider>
         </ConfigProvider>
       </DopebaseProvider>
