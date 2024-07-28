@@ -8,7 +8,8 @@ import {
   extendTheme,
   TranslationProvider,
   ActionSheetProvider,
-} from './src/core/dopebase'
+} from './src/core/dopebase';
+import configureStore from './src/redux/store';
 import AppContent from './src/AppContent';
 import translations from './src/translations/';
 import { ConfigProvider } from './src/config';
@@ -16,6 +17,8 @@ import { AuthProvider } from './src/core/onboarding/hooks/useAuth';
 import { authManager } from './src/core/onboarding/api';
 
 import MobileTheme from './src/theme';
+
+const store = configureStore();
 
 const App = () => {
   const theme = extendTheme(MobileTheme);
@@ -25,19 +28,22 @@ const App = () => {
     LogBox.ignoreAllLogs(true)
   }, [])
   return (
-    <TranslationProvider translations={translations}>
-      <DopebaseProvider theme={theme}>
-        <ConfigProvider>
-          <AuthProvider authManager={authManager}>
-            <MenuProvider>
-              <ActionSheetProvider>
-                <AppContent />
-              </ActionSheetProvider>
-            </MenuProvider>
-          </AuthProvider>
-        </ConfigProvider>
-      </DopebaseProvider>
-    </TranslationProvider>
+    <Provider store={store}>
+      <TranslationProvider translations={translations}>
+        <DopebaseProvider theme={theme}>
+          <ConfigProvider>
+            <AuthProvider authManager={authManager}>
+              <MenuProvider>
+                <ActionSheetProvider>
+                  <AppContent />
+                </ActionSheetProvider>
+              </MenuProvider>
+            </AuthProvider>
+          </ConfigProvider>
+        </DopebaseProvider>
+      </TranslationProvider>
+    </Provider>
+
   )
 }
 
