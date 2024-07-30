@@ -1,6 +1,6 @@
-import React from 'react'
-import { useOnboardingConfig } from '../../hooks/useOnboardingConfig'
-import WelcomeScreen from '../WelcomeScreen/WelcomeScreen'
+import React from 'react';
+import { useOnboardingConfig } from '../../hooks/useOnboardingConfig';
+import WelcomeScreen from '../WelcomeScreen/WelcomeScreen';
 
 export default function DelayedLoginScreen(props) {
   const { navigation } = props
@@ -13,4 +13,4 @@ export default function DelayedLoginScreen(props) {
       delayedMode={true}
     />
   )
-}
+};

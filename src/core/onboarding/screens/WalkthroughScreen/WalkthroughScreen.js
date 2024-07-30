@@ -69,6 +69,10 @@ const WalkthroughScreen = () => {
     return <Text style={styles.button}>{localized('Done')}</Text>
   }
 
+  const _renderPrevButton = () => {
+    return <Text style={styles.button}>{localized('Prev')}</Text>
+  }
+
   return (
     <AppIntroSlider
       data={slides}
@@ -76,13 +80,16 @@ const WalkthroughScreen = () => {
       onDone={_onDone}
       renderItem={_renderItem}
       //Handler for the done On last slide
+      // bottomButton={true}
       showSkipButton={true}
+      showPrevButton={true}
       onSkip={_onDone}
       renderNextButton={_renderNextButton}
       renderSkipButton={_renderSkipButton}
       renderDoneButton={_renderDoneButton}
+      renderPrevButton={_renderPrevButton}
     />
   )
-}
+};
 
-export default WalkthroughScreen
+export default WalkthroughScreen;

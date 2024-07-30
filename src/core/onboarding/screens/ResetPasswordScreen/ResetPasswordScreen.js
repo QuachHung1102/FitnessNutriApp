@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
-import { View, TouchableOpacity, Image, TextInput, Text } from 'react-native'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import React, { useState } from 'react';
+import { View, TouchableOpacity, Image, TextInput, Text } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {
   useTheme,
   useTranslations,
   ActivityIndicator,
   Alert,
-} from '../../../dopebase'
-import dynamicStyles from './styles'
-import { useAuth } from '../../hooks/useAuth'
-import { localizedErrorMessage } from '../../api/ErrorCode'
+} from '../../../dopebase';
+import dynamicStyles from './styles';
+import { useAuth } from '../../hooks/useAuth';
+import { localizedErrorMessage } from '../../api/ErrorCode';
 
 const ResetPasswordScreen = props => {
   const authManager = useAuth()
@@ -93,6 +93,6 @@ const ResetPasswordScreen = props => {
       {isLoading && <ActivityIndicator />}
     </View>
   )
-}
+};
 
-export default ResetPasswordScreen
+export default ResetPasswordScreen;

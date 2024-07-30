@@ -1,8 +1,8 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import { LoadScreen, WalkthroughScreen } from '../core/onboarding';
-// import HomeStackNavigator from './HomeStackNavigator';
-// import LoginStack from './AuthStackNavigator';
+import HomeStackNavigator from './HomeStackNavigator';  // Thằng này là MainStackNavigator
+import LoginStack from './AuthStackNavigator';
 
 const Root = createStackNavigator();
 const RootNavigator = () => {
@@ -13,8 +13,8 @@ const RootNavigator = () => {
     >
       <Root.Screen name="LoadScreen" component={LoadScreen} />
       <Root.Screen name="Walkthrough" component={WalkthroughScreen} />
-      {/* <Root.Screen name="LoginStack" component={LoginStack} /> */}
-      {/* <Root.Screen name="MainStack" component={HomeStackNavigator} /> */}
+      <Root.Screen name="LoginStack" component={LoginStack} />
+      <Root.Screen name="MainStack" component={HomeStackNavigator} />
     </Root.Navigator>
   );
 };

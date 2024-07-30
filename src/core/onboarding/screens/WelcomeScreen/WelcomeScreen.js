@@ -1,43 +1,43 @@
-import React, { useState, useEffect } from 'react'
-import { Image, Keyboard, Platform, Text, View } from 'react-native'
-import { useNavigation } from '@react-navigation/core'
-import { useDispatch } from 'react-redux'
-import messaging from '@react-native-firebase/messaging'
+import React, { useState, useEffect } from 'react';
+import { Image, Keyboard, Platform, Text, View } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
+import { useDispatch } from 'react-redux';
+import messaging from '@react-native-firebase/messaging';
 import {
   useTheme,
   useTranslations,
   ActivityIndicator,
   DismissButton,
   Button,
-} from '../../../dopebase'
-import dynamicStyles from './styles'
-import { setUserData } from '../../redux/auth'
-import { updateUser } from '../../../users'
-import { useOnboardingConfig } from '../../hooks/useOnboardingConfig'
+} from '../../../dopebase';
+import dynamicStyles from './styles';
+import { setUserData } from '../../redux/auth';
+import { updateUser } from '../../../users';
+import { useOnboardingConfig } from '../../hooks/useOnboardingConfig';
 
-import { useAuth } from '../../hooks/useAuth'
-import useCurrentUser from '../../hooks/useCurrentUser'
+import { useAuth } from '../../hooks/useAuth';
+import useCurrentUser from '../../hooks/useCurrentUser';
 
 const WelcomeScreen = props => {
-  const navigation = useNavigation()
-  const currentUser = useCurrentUser()
+  const navigation = useNavigation();
+  const currentUser = useCurrentUser();
 
-  const dispatch = useDispatch()
-  const { config } = useOnboardingConfig()
+  const dispatch = useDispatch();
+  const { config } = useOnboardingConfig();
 
-  const { localized } = useTranslations()
-  const { theme, appearance } = useTheme()
-  const styles = dynamicStyles(theme, appearance)
+  const { localized } = useTranslations();
+  const { theme, appearance } = useTheme();
+  const styles = dynamicStyles(theme, appearance);
 
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
 
-  const authManager = useAuth()
+  const authManager = useAuth();
 
-  const { title, caption } = props
+  const { title, caption } = props;
 
   useEffect(() => {
     tryToLoginFirst()
-  }, [])
+  }, []);
 
   const handleInitialNotification = async () => {
     const userID = currentUser?.id || currentUser?.userID
@@ -56,7 +56,7 @@ const WelcomeScreen = props => {
     if (userID && Platform.OS === 'ios') {
       updateUser(userID, { badgeCount: 0 })
     }
-  }
+  };
 
   const tryToLoginFirst = async () => {
     authManager
@@ -92,7 +92,7 @@ const WelcomeScreen = props => {
         console.log(error)
         setIsLoading(false)
       })
-  }
+  };
 
   const handleChatMessageType = (channelID, name) => {
     const channel = {
@@ -105,7 +105,7 @@ const WelcomeScreen = props => {
       channel,
       openedFromPushNotification: true,
     })
-  }
+  };
 
   if (isLoading == true) {
     return (
@@ -113,7 +113,7 @@ const WelcomeScreen = props => {
         <ActivityIndicator />
       </View>
     )
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -177,6 +177,6 @@ const WelcomeScreen = props => {
       </Button>
     </View>
   )
-}
+};
 
-export default WelcomeScreen
+export default WelcomeScreen;

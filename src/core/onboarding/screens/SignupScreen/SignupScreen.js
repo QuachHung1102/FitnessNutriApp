@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import {
   Image,
   Keyboard,
@@ -6,23 +6,23 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-} from 'react-native'
-import { useNavigation } from '@react-navigation/core'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import { useDispatch } from 'react-redux'
+} from 'react-native';
+import { useNavigation } from '@react-navigation/core';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { useDispatch } from 'react-redux';
 import {
   useTheme,
   useTranslations,
   ActivityIndicator,
   Alert,
   ProfilePictureSelector,
-} from '../../../dopebase'
-import dynamicStyles from './styles'
-import { setUserData } from '../../redux/auth'
-import { localizedErrorMessage } from '../../api/ErrorCode'
-import TermsOfUseView from '../../components/TermsOfUseView'
-import { useOnboardingConfig } from '../../hooks/useOnboardingConfig'
-import { useAuth } from '../../hooks/useAuth'
+} from '../../../dopebase';
+import dynamicStyles from './styles';
+import { setUserData } from '../../redux/auth';
+import { localizedErrorMessage } from '../../api/ErrorCode';
+import TermsOfUseView from '../../components/TermsOfUseView';
+import { useOnboardingConfig } from '../../hooks/useOnboardingConfig';
+import { useAuth } from '../../hooks/useAuth';
 
 const SignupScreen = () => {
   const navigation = useNavigation()

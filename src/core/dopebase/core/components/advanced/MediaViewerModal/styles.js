@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions, Platform } from 'react-native';
-import { ifIphoneX } from 'react-native-iphone-x-helper';
+import { ifIphoneX } from 'react-native-iphone-screen-helper';
 
 const { width, height } = Dimensions.get('window');
 const closeButtonSize = Math.floor(height * 0.032);

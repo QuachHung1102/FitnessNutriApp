@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import {
   Image,
   Keyboard,
@@ -6,38 +6,38 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-} from 'react-native'
-import { useNavigation } from '@react-navigation/core'
+} from 'react-native';
+import { useNavigation } from '@react-navigation/core';
 import appleAuth, {
   AppleButton,
-} from '@invertase/react-native-apple-authentication'
+} from '@invertase/react-native-apple-authentication';
 import IMGoogleSignInButton from '../../components/IMGoogleSignInButton/IMGoogleSignInButton'
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
 import {
   useTheme,
   useTranslations,
   ActivityIndicator,
   Alert,
-} from '../../../dopebase'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import dynamicStyles from './styles'
-import { setUserData } from '../../redux/auth'
-import { localizedErrorMessage } from '../../api/ErrorCode'
-import { useOnboardingConfig } from '../../hooks/useOnboardingConfig'
-import { useAuth } from '../../hooks/useAuth'
+} from '../../../dopebase';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import dynamicStyles from './styles';
+import { setUserData } from '../../redux/auth';
+import { localizedErrorMessage } from '../../api/ErrorCode';
+import { useOnboardingConfig } from '../../hooks/useOnboardingConfig';
+import { useAuth } from '../../hooks/useAuth';
 
 const LoginScreen = () => {
-  const navigation = useNavigation()
-  const authManager = useAuth()
-  const dispatch = useDispatch()
+  const navigation = useNavigation();
+  const authManager = useAuth();
+  const dispatch = useDispatch();
 
-  const { localized } = useTranslations()
-  const { theme, appearance } = useTheme()
-  const { config } = useOnboardingConfig()
-  const [loading, setLoading] = useState(false)
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const styles = dynamicStyles(theme, appearance)
+  const { localized } = useTranslations();
+  const { theme, appearance } = useTheme();
+  const { config } = useOnboardingConfig();
+  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const styles = dynamicStyles(theme, appearance);
 
   const onPressLogin = () => {
     setLoading(true)
@@ -75,7 +75,7 @@ const LoginScreen = () => {
           )
         }
       })
-  }
+  };
 
   const onFBButtonPress = () => {
     setLoading(true)
@@ -121,7 +121,7 @@ const LoginScreen = () => {
           },
         )
       })
-  }
+  };
 
   const onGoogleButtonPress = () => {
     setLoading(true)
@@ -160,7 +160,7 @@ const LoginScreen = () => {
           },
         )
       })
-  }
+  };
 
   const onAppleButtonPress = async () => {
     setLoading(true)
@@ -185,20 +185,20 @@ const LoginScreen = () => {
         )
       }
     })
-  }
+  };
 
   const onForgotPassword = async () => {
     navigation.push('ResetPassword', {
       isResetPassword: true,
     })
-  }
+  };
 
   const appleButtonStyle = config.isAppleAuthEnabled
     ? {
-        dark: AppleButton?.Style?.WHITE,
-        light: AppleButton?.Style?.BLACK,
-        'no-preference': AppleButton?.Style?.WHITE,
-      }
+      dark: AppleButton?.Style?.WHITE,
+      light: AppleButton?.Style?.BLACK,
+      'no-preference': AppleButton?.Style?.WHITE,
+    }
     : {}
 
   return (
@@ -286,6 +286,6 @@ const LoginScreen = () => {
       </KeyboardAwareScrollView>
     </View>
   )
-}
+};
 
-export default LoginScreen
+export default LoginScreen;

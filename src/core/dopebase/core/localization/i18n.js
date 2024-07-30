@@ -16,7 +16,7 @@ export const TranslationProvider = ({ children, translations }) => {
 
   const localized = useCallback(
     (key, config) => {
-      i18n.t(key, { ...config, locale }).includes('missing')
+      return i18n.t(key, { ...config, locale }).includes('missing')
         ? key
         : i18n.t(key, { ...config, locale })
     },
@@ -40,6 +40,7 @@ export const TranslationProvider = ({ children, translations }) => {
   useEffect(() => {
     console.log(`write to storage locale: ${locale}`);
     Storage.setItem('locale', locale);
+    // console.log(translations[locale]); // in ra bản dịch
     setI18nConfig();
   }, [locale]);
 

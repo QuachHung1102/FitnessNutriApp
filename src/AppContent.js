@@ -7,6 +7,7 @@ import { useConfig } from './config';
 
 export default AppContent = () => {
   const config = useConfig();
+  // console.log(config);
 
   return (
     <OnboardingConfigProvider config={config}>

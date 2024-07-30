@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Image,
   Keyboard,
@@ -6,19 +6,19 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from 'react-native'
-import PhoneInput from 'react-native-phone-input'
+} from 'react-native';
+import PhoneInput from 'react-native-phone-input';
 import {
   CodeField,
   Cursor,
   useBlurOnFulfill,
   useClearByFocusCell,
-} from 'react-native-confirmation-code-field'
-import { useNavigation, useRoute } from '@react-navigation/core'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+} from 'react-native-confirmation-code-field';
+import { useNavigation, useRoute } from '@react-navigation/core';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import appleAuth, {
   AppleButton,
-} from '@invertase/react-native-apple-authentication'
+} from '@invertase/react-native-apple-authentication';
 import {
   useTheme,
   useTranslations,
@@ -26,15 +26,15 @@ import {
   Alert,
   ProfilePictureSelector,
   CountriesModalPicker,
-} from '../../../dopebase'
-import { setUserData } from '../../redux/auth'
-import { useDispatch } from 'react-redux'
-import { localizedErrorMessage } from '../../api/ErrorCode'
-import TermsOfUseView from '../../components/TermsOfUseView'
-import dynamicStyles from './styles'
-import IMGoogleSignInButton from '../../components/IMGoogleSignInButton/IMGoogleSignInButton'
-import { useOnboardingConfig } from '../../hooks/useOnboardingConfig'
-import { useAuth } from '../../hooks/useAuth'
+} from '../../../dopebase';
+import { setUserData } from '../../redux/auth';
+import { useDispatch } from 'react-redux';
+import { localizedErrorMessage } from '../../api/ErrorCode';
+import TermsOfUseView from '../../components/TermsOfUseView';
+import dynamicStyles from './styles';
+import IMGoogleSignInButton from '../../components/IMGoogleSignInButton/IMGoogleSignInButton';
+import { useOnboardingConfig } from '../../hooks/useOnboardingConfig';
+import { useAuth } from '../../hooks/useAuth';
 
 const codeInputCellCount = 6
 
@@ -331,7 +331,7 @@ const SmsAuthenticationScreen = () => {
           flagStyle={styles.flagStyle}
           textStyle={styles.phoneInputTextStyle}
           ref={phoneRef}
-          initialCountry={'us'}
+          initialCountry={'vn'}
           onPressFlag={onPressFlag}
           offset={10}
           allowZeroAfterCountryCode
@@ -520,4 +520,4 @@ const SmsAuthenticationScreen = () => {
   )
 }
 
-export default SmsAuthenticationScreen
+export default SmsAuthenticationScreen;

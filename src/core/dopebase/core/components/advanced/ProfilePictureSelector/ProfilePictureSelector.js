@@ -15,21 +15,21 @@ import dynamicStyles from './styles';
 export const ProfilePictureSelector = props => {
   const [profilePictureURL, setProfilePictureURL] = useState(
     props.profilePictureURL || '',
-  )
+  );
   const originalProfilePictureURL = useRef(props.profilePictureURL || '')
   if (originalProfilePictureURL.current !== (props.profilePictureURL || '')) {
     originalProfilePictureURL.current = props.profilePictureURL || ''
     setProfilePictureURL(props.profilePictureURL || '')
-  }
+  };
 
-  const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(null)
-  const [isImageViewerVisible, setIsImageViewerVisible] = useState(false)
-  const [tappedImage, setTappedImage] = useState([])
-  const { localized } = useTranslations()
-  const { theme, appearance } = useTheme()
-  const styles = dynamicStyles(theme, appearance)
+  const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(null);
+  const [isImageViewerVisible, setIsImageViewerVisible] = useState(false);
+  const [tappedImage, setTappedImage] = useState([]);
+  const { localized } = useTranslations();
+  const { theme, appearance } = useTheme();
+  const styles = dynamicStyles(theme, appearance);
 
-  const { showActionSheetWithOptions } = useActionSheet()
+  const { showActionSheetWithOptions } = useActionSheet();
 
   const actionSheetOptions = useMemo(() => {
     return {
@@ -42,7 +42,7 @@ export const ProfilePictureSelector = props => {
       cancelButtonIndex: 1,
       destructiveButtonIndex: 2,
     }
-  }, [])
+  }, []);
 
   const handleProfilePictureClick = url => {
     if (url) {
@@ -63,14 +63,14 @@ export const ProfilePictureSelector = props => {
     } else {
       showActionSheet()
     }
-  }
+  };
 
   const onImageError = () => {
     console.log('Error loading profile photo at url ' + profilePictureURL)
     const defaultProfilePhotoURL =
       'https://www.iosapptemplates.com/wp-content/uploads/2019/06/empty-avatar.jpg'
     setProfilePictureURL(defaultProfilePhotoURL)
-  }
+  };
 
   const getPermissionAsync = async () => {
     if (Platform.OS === 'ios') {
@@ -85,7 +85,7 @@ export const ProfilePictureSelector = props => {
         )
       }
     }
-  }
+  };
 
   const onPressAddPhotoBtn = async () => {
     const options = {
@@ -99,7 +99,7 @@ export const ProfilePictureSelector = props => {
         skipBackup: true,
         path: 'images',
       },
-    }
+    };
 
     await getPermissionAsync()
 
@@ -108,15 +108,15 @@ export const ProfilePictureSelector = props => {
       // allowsEditing: true,
       // aspect: [4, 3],
       // quality: 1,
-    })
+    });
 
-    console.log(result)
+    console.log(result);
 
     if (!result.cancelled) {
       setProfilePictureURL(result.uri)
       props.setProfilePictureFile(result)
     }
-  }
+  };
 
   const closeButton = () => (
     <TouchableOpacity
@@ -124,7 +124,7 @@ export const ProfilePictureSelector = props => {
       onPress={() => setIsImageViewerVisible(false)}>
       <Image style={styles.closeIcon} source={theme.icons.close} />
     </TouchableOpacity>
-  )
+  );
 
   const showActionSheet = index => {
     setSelectedPhotoIndex(index)
@@ -137,7 +137,7 @@ export const ProfilePictureSelector = props => {
       },
       onActionDone,
     )
-  }
+  };
 
   const onActionDone = index => {
     if (index == 0) {
@@ -150,7 +150,7 @@ export const ProfilePictureSelector = props => {
         props.setProfilePictureFile(null)
       }
     }
-  }
+  };
 
   return (
     <>
@@ -185,4 +185,4 @@ export const ProfilePictureSelector = props => {
       </ScrollView>
     </>
   )
-}
+};

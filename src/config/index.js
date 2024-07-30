@@ -27,7 +27,7 @@ export const ConfigProvider = ({ children }) => {
           icon: require('../assets/icons/firebase-icon.png'),
           title: localized('Firebase'),
           description: localized(
-            'Save weeks of hard work by using our codebase.',
+            'Save weeks of hard work by using my codebase.',
           ),
         },
         {
