@@ -3,7 +3,21 @@ import { View, Modal, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { useTheme } from '../../../theming';
 import dynamicStyles from './styles';
 
-export const CountriesModalPicker = props => {
+export const CountriesModalPicker = (props = {
+  data: [],
+  onChange: () => { },
+  initValue: 'Select me!',
+  style: {},
+  selectStyle: {},
+  optionStyle: {},
+  optionTextStyle: {},
+  sectionStyle: {},
+  sectionTextStyle: {},
+  cancelStyle: {},
+  cancelTextStyle: {},
+  overlayStyle: {},
+  cancelText: 'cancel',
+}) => {
   const { theme, appearance } = useTheme();
   const styles = dynamicStyles(theme, appearance);
 
@@ -88,18 +102,18 @@ export const CountriesModalPicker = props => {
   return <View style={props.style}>{dp}</View>
 };
 
-CountriesModalPicker.defaultProps = {
-  data: [],
-  onChange: () => { },
-  initValue: 'Select me!',
-  style: {},
-  selectStyle: {},
-  optionStyle: {},
-  optionTextStyle: {},
-  sectionStyle: {},
-  sectionTextStyle: {},
-  cancelStyle: {},
-  cancelTextStyle: {},
-  overlayStyle: {},
-  cancelText: 'cancel',
-};
+// CountriesModalPicker.defaultProps = {
+//   data: [],
+//   onChange: () => { },
+//   initValue: 'Select me!',
+//   style: {},
+//   selectStyle: {},
+//   optionStyle: {},
+//   optionTextStyle: {},
+//   sectionStyle: {},
+//   sectionTextStyle: {},
+//   cancelStyle: {},
+//   cancelTextStyle: {},
+//   overlayStyle: {},
+//   cancelText: 'cancel',
+// };

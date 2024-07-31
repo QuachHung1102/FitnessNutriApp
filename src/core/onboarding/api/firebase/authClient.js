@@ -75,6 +75,8 @@ export const registerWithEmail = (userDetails, appIdentifier) => {
     auth()
       .createUserWithEmailAndPassword(email, password)
       .then(async response => {
+        console.log('createUserWithEmailAndPassword response:', response);
+        
         const usernameResponse = await checkUniqueUsername(username)
 
         if (usernameResponse?.taken) {

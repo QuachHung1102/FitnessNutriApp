@@ -134,7 +134,9 @@ const SignupScreen = () => {
     authManager
       .createAccountWithEmailAndPassword(userDetails, config)
       .then(response => {
+        console.log('createAccountWithEmailAndPassword response:', response);
         const user = response.user
+        console.log(user);
         if (user) {
           dispatch(setUserData({ user }))
           Keyboard.dismiss()

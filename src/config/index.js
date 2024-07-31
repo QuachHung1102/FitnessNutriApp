@@ -79,7 +79,7 @@ export const ConfigProvider = ({ children }) => {
         },
       ],
     },
-    tosLink: 'https://www.instamobile.io/eula-instachatty/',
+    tosLink: 'https://www.facebook.com/quachhuwng',
     isUsernameFieldEnabled: false,
     smsSignupFields: [
       {

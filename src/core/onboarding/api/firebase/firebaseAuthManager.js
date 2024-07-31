@@ -1,6 +1,6 @@
 import Geolocation from "@react-native-community/geolocation";
 import * as Location from "expo-location";
-// import * as Facebook from 'expo-facebook';
+// import * as Facebook from 'expo-facebook'; // không dùng được nữa @@
 import appleAuth, {
   AppleAuthRequestScope,
   AppleAuthRequestOperation,
@@ -59,6 +59,7 @@ const createAccountWithEmailAndPassword = (userDetails, appConfig) => {
       authAPI
         .registerWithEmail(userData, appConfig.appIdentifier)
         .then(async response => {
+          console.log('registerWithEmail response:', response);
           if (response.error) {
             resolve({ error: response.error })
           } else {
@@ -66,6 +67,7 @@ const createAccountWithEmailAndPassword = (userDetails, appConfig) => {
             let user = response.user
             if (photoFile) {
               storageAPI.processAndUploadMediaFile(photoFile).then(response => {
+                console.log('processAndUploadMediaFile response:', response);
                 if (response.error) {
                   // if account gets created, but photo upload fails, we still log the user in
                   resolve({
@@ -107,6 +109,7 @@ const createAccountWithEmailAndPassword = (userDetails, appConfig) => {
       profilePictureURL: defaultProfilePhotoURL,
     }
     accountCreationTask(userData).then(response => {
+      console.log('accountCreationTask response:', response);
       if (response.error) {
         resolve({ error: response.error })
       } else {
