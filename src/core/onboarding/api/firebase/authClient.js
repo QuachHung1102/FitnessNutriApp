@@ -76,10 +76,10 @@ export const registerWithEmail = (userDetails, appIdentifier) => {
       .createUserWithEmailAndPassword(email, password)
       .then(async response => {
         console.log('createUserWithEmailAndPassword response:', response);
-        
+
         const usernameResponse = await checkUniqueUsername(username)
 
-        if (usernameResponse?.taken) {
+        if (usernameResponse?.taken) {  // Nếu username đã tồn tại thì xóa user vừa tạo và trả về lỗi usernameInUse
           auth().currentUser.delete()
           return resolve({ error: ErrorCode.usernameInUse })
         }
@@ -101,16 +101,46 @@ export const registerWithEmail = (userDetails, appIdentifier) => {
           appIdentifier,
           createdAt: timestamp,
         }
-        usersRef
-          .doc(uid)
-          .set(data)
+        console.log('data:', response);
+        usersRef.get()
           .then(() => {
-            resolve({ user: data })
+            console.log('Firestore connection successful');
+            return usersRef.doc(uid).set(data);
           })
-          .catch(error => {
-            alert(error)
-            resolve({ error: ErrorCode.serverError })
+          .then(() => {
+            console.log('Data set successfully');
+            return usersRef.doc(uid).get();
           })
+          .then((documentSnapshot) => {
+            console.log('User exists: ', documentSnapshot.exists);
+            if (documentSnapshot.exists) {
+              console.log('User data: ', documentSnapshot.data());
+            }
+            resolve({ user: data });
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+            alert(error);
+            resolve({ error: ErrorCode.serverError });
+          });
+        // usersRef
+        //   .doc(uid)
+        //   .set(data)
+        //   .then(() => {
+        //     console.log('Data set successfully');
+        //     return usersRef.doc(uid).get();
+        //   })
+        //   .then((documentSnapshot) => {
+        //     console.log('User exists: ', documentSnapshot.exists);
+        //     if (documentSnapshot.exists) {
+        //       console.log('User data: ', documentSnapshot.data());
+        //     }
+        //     resolve({ user: data });
+        //   })
+        //   .catch(error => {
+        //     alert(error)
+        //     resolve({ error: ErrorCode.serverError })
+        //   })
       })
       .catch(error => {
         console.log('_error:', error)
