@@ -37,14 +37,18 @@ export const sendPasswordResetEmail = email => {
 };
 
 export const checkUniqueUsername = username => {
-  return new Promise(resolve => {
+  console.log(`checkUniqueUsername: ${username}`);
+  return new Promise((resolve, reject) => {
     if (!username) {
+      console.log('Username is empty or undefined');
       resolve()
     };
+    console.log('Checking Firestore for username:', username.toLowerCase());
     usersRef
       .where('username', '==', username?.toLowerCase())
       .get()
       .then(querySnapshot => {
+        console.log(querySnapshot);
         if (querySnapshot?.docs.length <= 0) {
           // doesn't exist
           resolve({ isUnique: true })
@@ -54,6 +58,7 @@ export const checkUniqueUsername = username => {
         }
       })
       .catch(error => {
+        console.error('Error querying Firestore:', error);
         reject(error)
       })
   });
@@ -76,10 +81,11 @@ export const registerWithEmail = (userDetails, appIdentifier) => {
       .createUserWithEmailAndPassword(email, password)
       .then(async response => {
         console.log('createUserWithEmailAndPassword response:', response);
-        
+
         const usernameResponse = await checkUniqueUsername(username)
 
-        if (usernameResponse?.taken) {
+        console.log(usernameResponse);
+        if (usernameResponse?.taken) {  // Nếu username đã tồn tại thì xóa user vừa tạo và trả về lỗi usernameInUse
           auth().currentUser.delete()
           return resolve({ error: ErrorCode.usernameInUse })
         }
@@ -101,16 +107,38 @@ export const registerWithEmail = (userDetails, appIdentifier) => {
           appIdentifier,
           createdAt: timestamp,
         }
-        usersRef
-          .doc(uid)
-          .set(data)
+        console.log('data:', response);
+        usersRef.get()
           .then(() => {
-            resolve({ user: data })
+            console.log('Firestore connection successful');
+            return usersRef.doc(uid).set(data);
           })
-          .catch(error => {
-            alert(error)
-            resolve({ error: ErrorCode.serverError })
+          .then(() => {
+            console.log('Data set successfully');
+            return usersRef.doc(uid).get();
           })
+          .then((documentSnapshot) => {
+            console.log('User exists: ', documentSnapshot.exists);
+            if (documentSnapshot.exists) {
+              console.log('User data: ', documentSnapshot.data());
+            }
+            resolve({ user: data });
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+            alert(error);
+            resolve({ error: ErrorCode.serverError });
+          });
+        // usersRef
+        //   .doc(uid)
+        //   .set(data)
+        //   .then(() => {
+        //     resolve({ user: data })
+        //   })
+        //   .catch(error => {
+        //     alert(error)
+        //     resolve({ error: ErrorCode.serverError })
+        //   })
       })
       .catch(error => {
         console.log('_error:', error)
@@ -134,6 +162,7 @@ export const loginWithEmailAndPassword = async (email, password) => {
           email,
           id: uid,
         }
+        console.log(userData);
         usersRef
           .doc(uid)
           .get()
