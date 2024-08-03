@@ -15,6 +15,7 @@ export const ConfigProvider = ({ children }) => {
     isAppleAuthEnabled: true,
     isFacebookAuthEnabled: true,
     forgotPasswordEnabled: true,
+    isDelayedLoginEnabled: true,
     appIdentifier: `com.fitnessnutriapp.rn.${Platform.OS}`,
     facebookIdentifier: '471719465581703',
     webClientId:
@@ -22,6 +23,8 @@ export const ConfigProvider = ({ children }) => {
     onboardingConfig: {
       welcomeTitle: localized('Say Hello To Your\nNew App'),
       welcomeCaption: localized(''),
+      delayedLoginTitle: localized('Welcome back!'),
+      delayedLoginCaption: localized(''),
       walkthroughScreens: [
         {
           icon: require('../assets/icons/firebase-icon.png'),

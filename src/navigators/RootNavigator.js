@@ -1,6 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
-import { LoadScreen, WalkthroughScreen } from '../core/onboarding';
+import { LoadScreen, WalkthroughScreen, DelayedLoginScreen } from '../core/onboarding';
 import HomeStackNavigator from './HomeStackNavigator';  // Thằng này là MainStackNavigator
 import LoginStack from './AuthStackNavigator';
 
@@ -15,6 +15,7 @@ const RootNavigator = () => {
       <Root.Screen name="Walkthrough" component={WalkthroughScreen} />
       <Root.Screen name="LoginStack" component={LoginStack} />
       <Root.Screen name="MainStack" component={HomeStackNavigator} />
+      <Root.Screen name="DelayedHome" component={DelayedLoginScreen} />
     </Root.Navigator>
   );
 };

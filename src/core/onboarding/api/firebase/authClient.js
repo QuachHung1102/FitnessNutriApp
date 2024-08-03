@@ -14,7 +14,7 @@ const handleUserFromAuthStateChanged = (user, resolve) => {
       .get()
       .then(document => {
         const userData = document.data();
-        resolve({ ...userData, id: user.uid, userID: user.uid });
+        resolve({ ...userData, id: user.uid, userID: user.uid, email: user.email });
       })
       .catch(error => {
         resolve(null);

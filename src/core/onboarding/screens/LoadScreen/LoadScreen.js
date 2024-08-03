@@ -1,5 +1,5 @@
 import React, { useCallback, useLayoutEffect } from 'react';
-import { View } from 'react-native';
+import { View, Keyboard } from 'react-native';
 import { useFocusEffect, useNavigation } from '@react-navigation/core';
 import deviceStorage from '../../utils/AuthDeviceStorage';
 import { useDispatch } from 'react-redux';
@@ -59,7 +59,7 @@ const LoadScreen = () => {
         navigation.navigate('DelayedHome')
       })
       .catch(error => {
-        console.log(error)
+        console.log("error: ", error)
         navigation.navigate('DelayedHome')
       })
   };

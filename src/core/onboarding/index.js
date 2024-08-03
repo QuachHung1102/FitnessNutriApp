@@ -5,5 +5,5 @@ export { default as SignupScreen } from './screens/SignupScreen/SignupScreen';
 export { default as LoginScreen } from './screens/LoginScreen/LoginScreen';
 export { default as SmsAuthenticationScreen } from './screens/SmsAuthenticationScreen/SmsAuthenticationScreen';
 export { default as ResetPasswordScreen } from './screens/ResetPasswordScreen/ResetPasswordScreen';
-export { default as DelayedLoginScreen } from './screens/DelayedLogin/DelayedLoginScreen'
-export { default as useCurrentUser } from './hooks/useCurrentUser'
+export { default as DelayedLoginScreen } from './screens/DelayedLogin/DelayedLoginScreen';
+export { default as useCurrentUser } from './hooks/useCurrentUser';

@@ -5,6 +5,7 @@ const VERTICAL_SPACING_BASE = 4;
 
 const icons = {
   logo: require('../assets/icons/rocket-icon.png'),
+  delayedLogo: require('../assets/icons/rocket-icon.png'),
   firebase: require('../assets/icons/firebase-icon.png'),
   userAvatar: require('../assets/icons/default-avatar.jpg'),
   backArrow: require('../assets/icons/arrow-back-icon.png'),
