@@ -16,6 +16,8 @@ export const ErrorCode = {
   invalidSMSCode: 'invalidSMSCode',
   googleSigninFailed: 'googleSigninFailed',
   requiresRecentLogin: 'requiresRecentLogin',
+  invalidCredential: 'invalidCredential',
+  tooManyRequests: 'tooManyRequests',
 }
 
 export const localizedErrorMessage = (errorCode, localized) => {

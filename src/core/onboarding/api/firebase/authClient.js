@@ -184,8 +184,8 @@ export const loginWithEmailAndPassword = async (email, password) => {
           })
       })
       .catch(error => {
-        console.log('error:', error)
         var errorCode = ErrorCode.serverError
+        console.log(error.code);
         switch (error.code) {
           case 'auth/wrong-password':
             errorCode = ErrorCode.invalidPassword
@@ -196,6 +196,11 @@ export const loginWithEmailAndPassword = async (email, password) => {
           case 'auth/user-not-found':
             errorCode = ErrorCode.noUser
             break
+          case 'auth/invalid-credential':
+            errorCode = ErrorCode.invalidCredential
+            break
+          case 'auth/too-many-requests':
+            errorCode = ErrorCode.tooManyRequests
           default:
             errorCode = ErrorCode.serverError
         }

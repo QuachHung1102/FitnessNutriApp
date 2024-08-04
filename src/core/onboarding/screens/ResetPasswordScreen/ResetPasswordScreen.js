@@ -29,9 +29,10 @@ const ResetPasswordScreen = props => {
     if (isValidEmail) {
       setIsLoading(true)
       authManager.sendPasswordResetEmail(email.trim()).then(response => {
+        
         setIsLoading(false)
 
-        if (response.error) {
+        if (response?.error) {
           return Alert.alert(
             '',
             localizedErrorMessage(response.error, localized),
