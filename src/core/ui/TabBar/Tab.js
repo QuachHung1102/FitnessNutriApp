@@ -4,6 +4,9 @@ import { useTheme } from '../../dopebase';
 import dynamicStyles from './styles';
 
 function Tab({ route, onPress, focus, tabIcons }) {
+  console.log("route:", route);
+  console.log("focus:", focus);
+  console.log("tabIcons:", tabIcons);
   const { theme, appearance } = useTheme()
   const styles = dynamicStyles(theme, appearance)
 

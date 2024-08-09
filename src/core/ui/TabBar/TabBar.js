@@ -6,7 +6,6 @@ import dynamicStyles from './styles';
 import Tab from './Tab';
 
 export function TabBarBuilder({ tabIcons, state, navigation, descriptors }) {
-  console.log(state);
   const insets = useSafeAreaInsets()
   const { theme, appearance } = useTheme()
   const styles = dynamicStyles(theme, appearance)
