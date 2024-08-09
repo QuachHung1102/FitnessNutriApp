@@ -37,7 +37,7 @@ const LoadScreen = () => {
       }
       navigation.navigate('LoginStack');
     } else {
-      navigation.navigate('Walkthrough');
+      navigation.navigate('WalkthroughStack');
     }
   };
 

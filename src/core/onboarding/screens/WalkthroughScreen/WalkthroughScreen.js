@@ -1,6 +1,6 @@
 import React, { useLayoutEffect } from 'react';
 import { View, Image, Text } from 'react-native';
-import AppIntroSlider from 'react-native-app-intro-slider'
+import AppIntroSlider from 'react-native-app-intro-slider';
 import { useNavigation } from '@react-navigation/core';
 import { useTheme, useTranslations } from '../../../dopebase';
 import deviceStorage from '../../utils/AuthDeviceStorage';
@@ -28,12 +28,12 @@ const WalkthroughScreen = () => {
   );
 
   const _onDone = () => {
-    deviceStorage.setShouldShowOnboardingFlow('false')
+    // deviceStorage.setShouldShowOnboardingFlow('false')
     if (config?.isDelayedLoginEnabled) {
       navigation.navigate('DelayedHome')
       return
     }
-    navigation.navigate('LoginStack', { screen: 'Welcome' })
+    navigation.navigate('WalkthroughStack', { screen: 'Question' })
   };
 
   useLayoutEffect(() => {
