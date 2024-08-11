@@ -16,7 +16,7 @@ import { ConfigProvider } from './src/config';
 import { AuthProvider } from './src/core/onboarding/hooks/useAuth';
 import { authManager } from './src/core/onboarding/api';
 
-import MobileTheme from './src/theme';
+import MobileTheme from './src/theme'; // Import your theme here
 
 const store = configureStore();
 

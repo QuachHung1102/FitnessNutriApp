@@ -1,6 +1,13 @@
 import React, { useContext } from "react";
 import { Platform } from "react-native";
 import { useTranslations } from "../core/dopebase";
+import {
+  homeNavigationSvg,
+  mentalNavigationSvg,
+  statisticalNavigationSvg,
+  mealNavigationSvg,
+  workoutNavigationSvg
+} from '../assets/images/svg';
 
 const regexForNames = /^[a-zA-Z]{2,25}$/;
 const regexForVietnameseNames = /^[a-zA-ZàáâãèéêẽìíîĩòóôõùúûũỳýỷỹđÀÁÂÃÈÉÊẼÌÍÎĨÒÓÔÕÙÚÛŨỲÝỶỸĐ\s]{2,25}$/;
@@ -240,24 +247,24 @@ export const ConfigProvider = ({ children }) => {
       ],
       tabIcons: {
         Home: {
-          focus: require('../assets/icons/home-1.png'),
-          unFocus: require('../assets/icons/home-2.png'),
+          focus: homeNavigationSvg(1),
+          unFocus: homeNavigationSvg(0),
         },
         Meal: {
-          focus: require('../assets/icons/meal-1.png'),
-          unFocus: require('../assets/icons/meal-2.png'),
+          focus: mealNavigationSvg(1),
+          unFocus: mealNavigationSvg(0),
         },
         WorkOut: {
-          focus: require('../assets/icons/jogging-1.png'),
-          unFocus: require('../assets/icons/jogging-2.png'),
+          focus: workoutNavigationSvg(1),
+          unFocus: workoutNavigationSvg(0),
         },
         Mental: {
-          focus: require('../assets/icons/brain-1.png'),
-          unFocus: require('../assets/icons/brain-2.png'),
+          focus: mentalNavigationSvg(1),
+          unFocus: mentalNavigationSvg(0),
         },
         Statistical: {
-          focus: require('../assets/icons/chart-vertical-1.png'),
-          unFocus: require('../assets/icons/chart-vertical-2.png'),
+          focus: statisticalNavigationSvg(1),
+          unFocus: statisticalNavigationSvg(0),
         },
         // Add more tabs as needed
       },

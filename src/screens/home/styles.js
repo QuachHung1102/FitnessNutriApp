@@ -22,6 +22,11 @@ const dynamicStyles = (theme, appearance) => {
       borderRadius: 64,
       marginTop: -320,
     },
+    headerLeftContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'flex-start',
+    },
   })
 }
 

@@ -8,6 +8,7 @@ const icons = {
   delayedLogo: require('../assets/icons/rocket-icon.png'),
   firebase: require('../assets/icons/firebase-icon.png'),
   userAvatar: require('../assets/icons/default-avatar.jpg'),
+  userDefault: require('../assets/icons/userDefault.png'),
   backArrow: require('../assets/icons/arrow-back-icon.png'),
   home_android: require('../assets/icons/home-icon-24.png'),
   search: require('../assets/icons/search.png'),
@@ -36,6 +37,8 @@ const lightColors = {
   grey6: '#d6d6d6',
   grey9: '#939393',
   red: '#ea0606',
+  primaryButtonTabNonActive: '#000000',
+  primaryButtonTabActive: '#5244F3',
 };
 
 const MobileTheme = {
@@ -56,6 +59,8 @@ const MobileTheme = {
       grey6: '#f5f5f5',
       grey9: '#eaeaea',
       red: '#ea0606',
+      primaryButtonTabActive: '#5244F3',
+      primaryButtonTabNonActive: '#EEE4FF',
     },
   },
   spaces: {

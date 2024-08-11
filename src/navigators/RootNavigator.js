@@ -9,7 +9,7 @@ const Root = createStackNavigator();
 const RootNavigator = () => {
   return (
     <Root.Navigator
-      screenOptions={{ headerShown: false, animationEnabled: false }}
+      screenOptions={{ headerShown: false, animationEnabled: false}}
       initialRouteName="LoadScreen"
     >
       <Root.Screen name="LoadScreen" component={LoadScreen} />

@@ -10,8 +10,8 @@ export const TranslationContext = React.createContext({});
 export const TranslationProvider = ({ children, translations }) => {
   const [locale, setLocale] = useState(Localization.getLocales()[0].languageTag);
 
-  console.log('setting up translations');
-  console.log(`local locale: ${Localization.getLocales()[0].languageTag} `);
+  console.log('Setting up translations');
+  console.log(`local: ${Localization.getLocales()[0].languageTag} `);
   console.log(`default locale: ${locale} `);
 
   const localized = useCallback(
@@ -26,7 +26,7 @@ export const TranslationProvider = ({ children, translations }) => {
   const getLocale = useCallback(async () => {
     const localeJSON = await Storage.getItem('locale');
     console.log(
-      `getting locale from storage and writing it to memory ${localeJSON}`,
+      `getting locale from Storage and writing it to memory ${localeJSON}`,
     );
 
     // If we have a locale stored in local storage, that is high priority (it overrides the current device locale)

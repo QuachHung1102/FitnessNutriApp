@@ -7,6 +7,7 @@ import Tab from './Tab';
 
 export function TabBarBuilder({ tabIcons, state, navigation, descriptors }) {
   const insets = useSafeAreaInsets()
+
   const { theme, appearance } = useTheme()
   const styles = dynamicStyles(theme, appearance)
   const focusedOptions =
@@ -35,7 +36,7 @@ export function TabBarBuilder({ tabIcons, state, navigation, descriptors }) {
               key={index + ''}
               route={state.routes[index]}
               tabIcons={tabIcons}
-              focus={state.index === index ? true : false}
+              focus={state.index === index}
               onPress={() => navigation.navigate(route.name)}
             />
           )
@@ -43,8 +44,8 @@ export function TabBarBuilder({ tabIcons, state, navigation, descriptors }) {
       </View>
     )
   } else {
-    return null;
+    return null
   }
 }
 
-export default TabBarBuilder;
+export default TabBarBuilder
