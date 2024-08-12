@@ -1,5 +1,5 @@
 import React, { memo, useEffect, useLayoutEffect, useCallback } from 'react';
-import { Dimensions, Text, View } from 'react-native';
+import { Dimensions, ScrollView, View, Text } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { useTheme, useTranslations, TouchableIcon } from '../../core/dopebase';
 import dynamicStyles from './styles';
@@ -47,10 +47,9 @@ export const HomeScreen = memo(props => {
               borderColor: colorSet.secondaryBackground,
             }}
             iconSource={theme.icons.userDefault}
-          // onPress={onLogout}
           />
           <View>
-            <Text>{currentDate}</Text>
+            <Text style={styles.currentDate}>{currentDate}</Text>
             <Text>Hãy thực hiện chế độ hôm nay</Text>
           </View>
         </View>
@@ -92,14 +91,20 @@ export const HomeScreen = memo(props => {
   }, [currentUser])
 
   return (
-    <View style={styles.container}>
-      <FastImage
-        style={styles.image}
-        source={{ uri: currentUser?.profilePictureURL }}
-      />
-      <Text style={styles.text}>
-        {localized('Logged in as')} {currentUser?.email}
-      </Text>
-    </View>
+    <ScrollView>
+      <View>
+        <Text>{localized('Today')}</Text>
+      </View>
+    </ScrollView>
   )
 })
+
+{/* 
+  <FastImage
+    style={styles.image}
+    source={{ uri: currentUser?.profilePictureURL }}
+  />
+  <Text style={styles.text}>
+    {localized('Logged in as')} {currentUser?.email}
+  </Text> 
+*/}

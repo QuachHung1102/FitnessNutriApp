@@ -39,6 +39,7 @@ const lightColors = {
   red: '#ea0606',
   primaryButtonTabNonActive: '#000000',
   primaryButtonTabActive: '#5244F3',
+  primaryButtonTextNonActive: 'rgba(0, 0, 0, 0.5)',
 };
 
 const MobileTheme = {
@@ -61,6 +62,7 @@ const MobileTheme = {
       red: '#ea0606',
       primaryButtonTabActive: '#5244F3',
       primaryButtonTabNonActive: '#EEE4FF',
+      primaryButtonTextNonActive: 'rgba(238, 228, 255, 0.5)',
     },
   },
   spaces: {

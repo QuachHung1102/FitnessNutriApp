@@ -19,7 +19,7 @@ const MainStackNavigator = () => {
         headerBackTitleVisible: false,
         headerBackTitle: localized('Back'),
         tabBarActiveTintColor: "#5244F3",
-        tabBarInactiveTintColor: "rgba(238, 228, 255, 0.5)",
+        tabBarInactiveTintColor: colorSet.primaryButtonTextNonActive,
         tabBarIcon: ({ focused, color, size }) => {
           let icon;
           if (route.name === 'Home') {
@@ -52,11 +52,7 @@ const MainStackNavigator = () => {
           // borderTopEndRadius: 15,
           // borderTopStartRadius: 15,
         },
-        tabBarLabel: ({ focused }) => ({
-          style: {
-            color: focused ? colorSet.primaryButtonTabActive : colorSet.primaryButtonTabNonActive,
-          },
-        }),
+        
       })
       }
       initialRouteName="Home"

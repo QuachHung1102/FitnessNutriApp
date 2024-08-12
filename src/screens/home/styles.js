@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { useTheme } from '../../core/dopebase';
 
 const dynamicStyles = (theme, appearance) => {
   const colorSet = theme.colors[appearance]
@@ -22,11 +23,20 @@ const dynamicStyles = (theme, appearance) => {
       borderRadius: 64,
       marginTop: -320,
     },
+    // Phần này không thuộc template
     headerLeftContainer: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'flex-start',
     },
+    currentDate: {
+      fontSize: 16,
+      fontWeight: '700',
+      lineHeight: 21,
+    },
+    headingBlock: {
+
+    }
   })
 }
 
