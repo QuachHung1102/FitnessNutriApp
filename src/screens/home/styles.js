@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import { useTheme } from '../../core/dopebase';
 
 const dynamicStyles = (theme, appearance) => {
@@ -34,9 +34,20 @@ const dynamicStyles = (theme, appearance) => {
       fontWeight: '700',
       lineHeight: 21,
     },
-    headingBlock: {
-
-    }
+    calorBurnedContainer: {
+      backgroundColor: colorSet.primaryForeground,
+      borderRadius: 16,
+      width: Dimensions.get('window').width * 0.55,
+      height: Dimensions.get('window').width * 0.3,
+    },
+    consumptionContainer: {
+      backgroundColor: colorSet.primaryBackground,
+      borderRadius: 16,
+      width: Dimensions.get('window').width * 0.3,
+      height: Dimensions.get('window').width * 0.3,
+      borderWidth: 2,
+      borderColor: colorSet.primaryBorder,
+    },
   })
 }
 

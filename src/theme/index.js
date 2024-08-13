@@ -26,7 +26,7 @@ const icons = {
 const lightColors = {
   primaryBackground: '#ffffff',
   secondaryBackground: '#ffffff',
-  primaryForeground: '#FF5A66',
+  primaryForeground: '#5244F3',
   secondaryForeground: '#8442bd',
   foregroundContrast: 'white',
   primaryText: '#151723',
@@ -40,6 +40,8 @@ const lightColors = {
   primaryButtonTabNonActive: '#000000',
   primaryButtonTabActive: '#5244F3',
   primaryButtonTextNonActive: 'rgba(0, 0, 0, 0.5)',
+  primaryBorder: '#000000',
+  svgColor: '#000',
 };
 
 const MobileTheme = {
@@ -49,7 +51,7 @@ const MobileTheme = {
     dark: {
       primaryBackground: '#121212',
       secondaryBackground: '#000000',
-      primaryForeground: '#FF5A66',
+      primaryForeground: '#5244F3',
       secondaryForeground: '#8442bd',
       foregroundContrast: 'white',
       primaryText: '#ffffff',
@@ -63,6 +65,8 @@ const MobileTheme = {
       primaryButtonTabActive: '#5244F3',
       primaryButtonTabNonActive: '#EEE4FF',
       primaryButtonTextNonActive: 'rgba(238, 228, 255, 0.5)',
+      primaryBorder: '#5244F3',
+      svgColor: '#fff',
     },
   },
   spaces: {

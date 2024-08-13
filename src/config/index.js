@@ -6,7 +6,7 @@ import {
   mentalNavigationSvg,
   statisticalNavigationSvg,
   mealNavigationSvg,
-  workoutNavigationSvg
+  workoutNavigationSvg,
 } from '../assets/images/svg';
 
 const regexForNames = /^[a-zA-Z]{2,25}$/;

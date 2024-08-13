@@ -1,19 +1,22 @@
 import React, { memo, useEffect, useLayoutEffect, useCallback } from 'react';
 import { Dimensions, ScrollView, View, Text } from 'react-native';
+import { View as CustomView } from '../../core/dopebase';
 import FastImage from 'react-native-fast-image';
 import { useTheme, useTranslations, TouchableIcon } from '../../core/dopebase';
 import dynamicStyles from './styles';
 import { useCurrentUser } from '../../core/onboarding';
 import { useAuth } from '../../core/onboarding/hooks/useAuth';
 import { timeFormat, getUnixTimeStamp, getCurrentDateFormatted } from '../../core/helpers/timeFormat';
+import HeadingBlock from '../../components/HeadingBlock';
+import { WorkoutSvg, MealSvg } from '../../assets/images/svg';
 
 export const HomeScreen = memo(props => {
   const { navigation } = props
   const currentUser = useCurrentUser()
   const authManager = useAuth()
-
   const { localized } = useTranslations()
   const { theme, appearance } = useTheme()
+  const colorSet = theme.colors[appearance]
   const styles = dynamicStyles(theme, appearance)
   let currentDate;
 
@@ -27,12 +30,10 @@ export const HomeScreen = memo(props => {
         console.error('Error fetching current date:', error);
       }
     };
-
     fetchCurrentDate();
   }, []);
 
   useLayoutEffect(() => {
-    const colorSet = theme.colors[appearance]
 
     navigation.setOptions({
       // headerTitle: localized('Home'),
@@ -91,10 +92,22 @@ export const HomeScreen = memo(props => {
   }, [currentUser])
 
   return (
-    <ScrollView>
-      <View>
-        <Text>{localized('Today')}</Text>
-      </View>
+    <ScrollView
+      style={{ backgroundColor: colorSet.primaryBackground }}
+    >
+      <HeadingBlock localized={localized} text={"Today"} />
+      <CustomView mh5 style={{ flexDirection: 'row', gap: 16 }}>
+        <CustomView style={styles.calorBurnedContainer}>
+          <WorkoutSvg color={colorSet.svgColor} width={32} height={32} />
+          <Text>{localized("Calories Burned")}</Text>
+          <Text>320 Kcal</Text>
+        </CustomView>
+        <CustomView style={styles.consumptionContainer}>
+          <MealSvg color={colorSet.svgColor} width={32} height={32} />
+          <Text>{localized("Consume")}</Text>
+          <Text>320 Kcal</Text>
+        </CustomView>
+      </CustomView>
     </ScrollView>
   )
 })
