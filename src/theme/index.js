@@ -26,6 +26,7 @@ const icons = {
 const lightColors = {
   primaryBackground: '#ffffff',
   secondaryBackground: '#ffffff',
+  thirBackground: '#5244F3',
   primaryForeground: '#5244F3',
   secondaryForeground: '#8442bd',
   foregroundContrast: 'white',
@@ -51,6 +52,7 @@ const MobileTheme = {
     dark: {
       primaryBackground: '#121212',
       secondaryBackground: '#000000',
+      thirBackground: '#5244F3',
       primaryForeground: '#5244F3',
       secondaryForeground: '#8442bd',
       foregroundContrast: 'white',

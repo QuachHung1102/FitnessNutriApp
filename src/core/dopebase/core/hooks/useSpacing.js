@@ -71,6 +71,26 @@ export const useSpacing = props => {
   mr7 && res.push({ marginRight: 7 * BASE });
   mr8 && res.push({ marginRight: 8 * BASE });
 
+  const { pv1, pv2, pv3, pv4, pv5, pv6, pv7, pv8 } = props;
+  pv1 && res.push({ paddingVertical: BASE });
+  pv2 && res.push({ paddingVertical: 2 * BASE });
+  pv3 && res.push({ paddingVertical: 3 * BASE });
+  pv4 && res.push({ paddingVertical: 4 * BASE });
+  pv5 && res.push({ paddingVertical: 5 * BASE });
+  pv6 && res.push({ paddingVertical: 6 * BASE });
+  pv7 && res.push({ paddingVertical: 7 * BASE });
+  pv8 && res.push({ paddingVertical: 8 * BASE });
+
+  const { ph1, ph2, ph3, ph4, ph5, ph6, ph7, ph8 } = props;
+  ph1 && res.push({ paddingHorizontal: BASE });
+  ph2 && res.push({ paddingHorizontal: 2 * BASE });
+  ph3 && res.push({ paddingHorizontal: 3 * BASE });
+  ph4 && res.push({ paddingHorizontal: 4 * BASE });
+  ph5 && res.push({ paddingHorizontal: 5 * BASE });
+  ph6 && res.push({ paddingHorizontal: 6 * BASE });
+  ph7 && res.push({ paddingHorizontal: 7 * BASE });
+  ph8 && res.push({ paddingHorizontal: 8 * BASE });
+
   const { pt1, pt2, pt3, pt4, pt5, pt6, pt7, pt8 } = props;
   pt1 && res.push({ paddingTop: BASE });
   pt2 && res.push({ paddingTop: 2 * BASE });

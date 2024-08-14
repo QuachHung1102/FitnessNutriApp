@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useLayoutEffect, useCallback } from 'react';
 import { Dimensions, ScrollView, View, Text } from 'react-native';
-import { View as CustomView } from '../../core/dopebase';
+import { View as CustomView, Text as CustomText } from '../../core/dopebase';
 import FastImage from 'react-native-fast-image';
 import { useTheme, useTranslations, TouchableIcon } from '../../core/dopebase';
 import dynamicStyles from './styles';
@@ -9,6 +9,7 @@ import { useAuth } from '../../core/onboarding/hooks/useAuth';
 import { timeFormat, getUnixTimeStamp, getCurrentDateFormatted } from '../../core/helpers/timeFormat';
 import HeadingBlock from '../../components/HeadingBlock';
 import { WorkoutSvg, MealSvg } from '../../assets/images/svg';
+import ConsumWater from './ConsumWater';
 
 export const HomeScreen = memo(props => {
   const { navigation } = props
@@ -19,6 +20,7 @@ export const HomeScreen = memo(props => {
   const colorSet = theme.colors[appearance]
   const styles = dynamicStyles(theme, appearance)
   let currentDate;
+  let iconsSize = Dimensions.get('screen').width * 0.07;
 
   useEffect(() => {
     const timeStamp = getUnixTimeStamp();
@@ -97,15 +99,36 @@ export const HomeScreen = memo(props => {
     >
       <HeadingBlock localized={localized} text={"Today"} />
       <CustomView mh5 style={{ flexDirection: 'row', gap: 16 }}>
-        <CustomView style={styles.calorBurnedContainer}>
-          <WorkoutSvg color={colorSet.svgColor} width={32} height={32} />
-          <Text>{localized("Calories Burned")}</Text>
+        <CustomView br4 ph3 pv3 style={styles.calorBurnedContainer}>
+          <CustomView mb3 style={[styles.iconCover, {
+            backgroundColor: colorSet.secondaryBackground,
+            width: iconsSize * 1.6,
+            height: iconsSize * 1.6,
+          }]}>
+            <WorkoutSvg color={colorSet.svgColor} width={iconsSize} height={iconsSize} />
+          </CustomView>
+          <CustomText h3>{localized("Calories Burned")}</CustomText>
           <Text>320 Kcal</Text>
         </CustomView>
-        <CustomView style={styles.consumptionContainer}>
-          <MealSvg color={colorSet.svgColor} width={32} height={32} />
-          <Text>{localized("Consume")}</Text>
+        <CustomView br4 ph3 pv3 style={styles.consumptionContainer}>
+          <CustomView mb3 style={[styles.iconCover, {
+            backgroundColor: colorSet.thirBackground,
+            width: iconsSize * 1.6,
+            height: iconsSize * 1.6,
+          }]}>
+            <MealSvg color={colorSet.svgColor} width={iconsSize} height={iconsSize} />
+          </CustomView>
+          <CustomText h3>{localized("Consume")}</CustomText>
           <Text>320 Kcal</Text>
+        </CustomView>
+      </CustomView>
+      <CustomView mt5>
+        <CustomView mh5 ph3 pt3 br4 style={styles.consumWaterContainer}>
+          <CustomView style={styles.consumWaterContainerText}>
+            <CustomText h3 style={[styles.consumWaterText]}>Uống nước</CustomText>
+            <CustomText style={[styles.consumWaterText]}>Mục tiêu: 0.25/2l</CustomText>
+          </CustomView>
+          <ConsumWater />
         </CustomView>
       </CustomView>
     </ScrollView>

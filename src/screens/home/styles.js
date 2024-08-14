@@ -36,18 +36,32 @@ const dynamicStyles = (theme, appearance) => {
     },
     calorBurnedContainer: {
       backgroundColor: colorSet.primaryForeground,
-      borderRadius: 16,
       width: Dimensions.get('window').width * 0.55,
-      height: Dimensions.get('window').width * 0.3,
+      height: Dimensions.get('window').width * 0.31,
     },
     consumptionContainer: {
       backgroundColor: colorSet.primaryBackground,
-      borderRadius: 16,
-      width: Dimensions.get('window').width * 0.3,
-      height: Dimensions.get('window').width * 0.3,
+      width: Dimensions.get('window').width * 0.31,
+      height: Dimensions.get('window').width * 0.31,
       borderWidth: 2,
       borderColor: colorSet.primaryBorder,
     },
+    iconCover : {
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 50,
+    },
+    consumWaterContainer: {
+      backgroundColor: "#2F6DF6",
+    },
+    consumWaterContainerText: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
+    consumWaterText: {
+      color: colorSet.primaryText,
+    }
   })
 }
 
