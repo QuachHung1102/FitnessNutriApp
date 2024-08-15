@@ -61,7 +61,14 @@ const dynamicStyles = (theme, appearance) => {
     },
     consumWaterText: {
       color: colorSet.primaryText,
-    }
+    },
+    updateAppearanceContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: colorSet.primaryForeground,
+      gap: Dimensions.get('window').width * 0.07,
+    },
   })
 }
 

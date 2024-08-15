@@ -1,5 +1,6 @@
 export { TouchableIcon } from './TouchableIcon/TouchableIcon'
 export { ProfilePictureSelector } from './ProfilePictureSelector/ProfilePictureSelector'
+export { ProfilePictureUpdate } from './ProfilePictureUpdate/ProfilePictureUpdate'
 export { MediaViewerModal } from './MediaViewerModal/MediaViewerModal'
 export { ActivityIndicator } from './ActivityIndicator'
 export { CountriesModalPicker } from './CountriesModalPicker/CountriesModalPicker'

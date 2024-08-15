@@ -3,6 +3,7 @@ import { View, IconButton } from "../../core/dopebase";
 import { ScrollView } from "react-native-gesture-handler";
 import glass from "../../assets/icons/glass.png";
 import glassFull from "../../assets/icons/glassFull.png";
+import { FlatList } from "react-native";
 
 const ConsumWater = () => {
   const [waterL, setWaterL] = useState(0);
@@ -13,16 +14,19 @@ const ConsumWater = () => {
       justifyContent: 'space-around',
       alignItems: 'center',
     }}>
-      <IconButton onPress={setWaterL} source={glass} marginRight={8} width={28} height={36} />
-      <IconButton onPress={setWaterL} source={glass} marginRight={8} width={28} height={36} />
-      <IconButton onPress={setWaterL} source={glass} marginRight={8} width={28} height={36} />
-      <IconButton onPress={setWaterL} source={glass} marginRight={8} width={28} height={36} />
-      <IconButton onPress={setWaterL} source={glass} marginRight={8} width={28} height={36} />
-      <IconButton onPress={setWaterL} source={glass} marginRight={8} width={28} height={36} />
-      <IconButton onPress={setWaterL} source={glass} marginRight={8} width={28} height={36} />
-      <IconButton onPress={setWaterL} source={glass} marginRight={8} width={28} height={36} />
+      {Array.from({ length: 8 }, (_, i) => (
+        <IconButton
+          key={i}
+          onPress={() => setWaterL(i + 1)}
+          source={i < waterL ? glassFull : glass}
+          marginRight={8}
+          width={28}
+          height={36}
+        />
+      ))}
     </View>
   )
 }
 
 export default memo(ConsumWater);
+

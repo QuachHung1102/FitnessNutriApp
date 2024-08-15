@@ -112,7 +112,7 @@ export const ProfilePictureSelector = props => {
 
     console.log(result);
 
-    if (!result.cancelled) {
+    if (!result.canceled) {
       setProfilePictureURL(result.uri)
       props.setProfilePictureFile(result)
     }
@@ -169,7 +169,6 @@ export const ProfilePictureSelector = props => {
             onError={onImageError}
           />
         </TouchableHighlight>
-
         <TouchableOpacity onPress={showActionSheet} style={styles.addButton}>
           <Image style={styles.cameraIcon} source={theme.icons.cameraFilled} />
         </TouchableOpacity>

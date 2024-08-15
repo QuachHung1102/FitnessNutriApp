@@ -1,8 +1,14 @@
-import React, { memo, useEffect, useLayoutEffect, useCallback } from 'react';
+import React, { memo, useEffect, useLayoutEffect, useCallback, useState } from 'react';
 import { Dimensions, ScrollView, View, Text } from 'react-native';
-import { View as CustomView, Text as CustomText } from '../../core/dopebase';
+import {
+  View as CustomView,
+  Text as CustomText,
+  useTheme,
+  useTranslations,
+  TouchableIcon,
+  ProfilePictureUpdate,
+} from '../../core/dopebase';
 import FastImage from 'react-native-fast-image';
-import { useTheme, useTranslations, TouchableIcon } from '../../core/dopebase';
 import dynamicStyles from './styles';
 import { useCurrentUser } from '../../core/onboarding';
 import { useAuth } from '../../core/onboarding/hooks/useAuth';
@@ -21,6 +27,8 @@ export const HomeScreen = memo(props => {
   const styles = dynamicStyles(theme, appearance)
   let currentDate;
   let iconsSize = Dimensions.get('screen').width * 0.07;
+
+  const [profilePictureFile, setProfilePictureFile] = useState(null)
 
   useEffect(() => {
     const timeStamp = getUnixTimeStamp();
@@ -131,6 +139,15 @@ export const HomeScreen = memo(props => {
           <ConsumWater />
         </CustomView>
       </CustomView>
+      <CustomView mt5>
+        <CustomView mh5 br4 pv5 style={styles.updateAppearanceContainer}>
+          <View>
+            <ProfilePictureUpdate setProfilePictureFile={setProfilePictureFile} />
+          </View>
+          <CustomText h2>{localized("Update Appearance")}</CustomText>
+        </CustomView>
+      </CustomView>
+
     </ScrollView>
   )
 })
