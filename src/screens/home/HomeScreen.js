@@ -1,5 +1,5 @@
 import React, { memo, useEffect, useLayoutEffect, useCallback, useState } from 'react';
-import { Dimensions, ScrollView, View, Text } from 'react-native';
+import { Dimensions, ScrollView, View, Text, Alert } from 'react-native';
 import {
   View as CustomView,
   Text as CustomText,
@@ -7,6 +7,7 @@ import {
   useTranslations,
   TouchableIcon,
   ProfilePictureUpdate,
+  Button,
 } from '../../core/dopebase';
 import FastImage from 'react-native-fast-image';
 import dynamicStyles from './styles';
@@ -16,6 +17,8 @@ import { timeFormat, getUnixTimeStamp, getCurrentDateFormatted } from '../../cor
 import HeadingBlock from '../../components/HeadingBlock';
 import { WorkoutSvg, MealSvg } from '../../assets/images/svg';
 import ConsumWater from './ConsumWater';
+
+import plusIcon from '../../assets/icons/add.png';
 
 export const HomeScreen = memo(props => {
   const { navigation } = props
@@ -28,7 +31,11 @@ export const HomeScreen = memo(props => {
   let currentDate;
   let iconsSize = Dimensions.get('screen').width * 0.07;
 
-  const [profilePictureFile, setProfilePictureFile] = useState(null)
+  const [profilePictureFile, setProfilePictureFile] = useState(null);
+
+  const handlePress = () => {
+    Alert.alert('Ố la la', 'This feature is not implemented yet')
+  };
 
   useEffect(() => {
     const timeStamp = getUnixTimeStamp();
@@ -60,7 +67,7 @@ export const HomeScreen = memo(props => {
             iconSource={theme.icons.userDefault}
           />
           <View>
-            <Text style={styles.currentDate}>{currentDate}</Text>
+            <CustomText h3 style={styles.currentDate}>{currentDate}</CustomText>
             <Text>Hãy thực hiện chế độ hôm nay</Text>
           </View>
         </View>
@@ -133,7 +140,7 @@ export const HomeScreen = memo(props => {
       <CustomView mt5>
         <CustomView mh5 ph3 pt3 br4 style={styles.consumWaterContainer}>
           <CustomView style={styles.consumWaterContainerText}>
-            <CustomText h3 style={[styles.consumWaterText]}>Uống nước</CustomText>
+            <CustomText h3 style={[styles.consumWaterText]}>{localized("Water Intake")}</CustomText>
             <CustomText style={[styles.consumWaterText]}>Mục tiêu: 0.25/2l</CustomText>
           </CustomView>
           <ConsumWater />
@@ -147,7 +154,35 @@ export const HomeScreen = memo(props => {
           <CustomText h2>{localized("Update Appearance")}</CustomText>
         </CustomView>
       </CustomView>
-
+      <HeadingBlock localized={localized} text={"Today's Nutrition"} />
+      <CustomView>
+        <TouchableIcon
+          onPress={handlePress}
+          iconSource={plusIcon}
+          title={localized('Enter Ingredients')}
+          containerStyle={{ alignItems: 'center', justifyContent: 'center' }}
+          imageStyle={{ width: 30, height: 30 }}
+          titleStyle={{ fontSize: Dimensions.get('window').width * 0.045, fontWeight: '700' }}
+          renderTitle={true}
+          tintColor={colorSet.primaryText}
+        />
+      </CustomView>
+      <CustomView ph5 mb8>
+        <CustomView mv3 pv4 br4 style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-around',
+          backgroundColor: "#CCCCCC",
+        }}>
+          <CustomText h3>{localized("Nutrition Plan")}</CustomText>
+          <Button text={localized("View")} onPress={handlePress} radius={16} containerStyle={{
+            paddingLeft: 25,
+            paddingRight: 25,
+            paddingTop: 10,
+            paddingBottom: 10
+          }} />
+        </CustomView>
+      </CustomView>
     </ScrollView>
   )
 })

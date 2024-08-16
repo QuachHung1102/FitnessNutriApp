@@ -18,6 +18,7 @@ export const TouchableIcon = props => {
     iconRef,
     onLayout,
     disabled = false,
+    tintColor,
   } = props
   const { theme, appearance } = useTheme()
   const styles = dynamicStyles(theme, appearance)
@@ -32,7 +33,7 @@ export const TouchableIcon = props => {
       onPressOut={onPressOut}
       onPressIn={onPressIn}
       onPress={onPress}>
-      <Image style={[styles.Image, imageStyle]} source={iconSource} />
+      <Image tintColor={tintColor} style={[styles.Image, imageStyle]} source={iconSource} />
       {renderTitle && <Text style={[styles.title, titleStyle]}>{title}</Text>}
     </TouchableOpacity>
   )
