@@ -3,6 +3,7 @@ import { Text as RNText } from 'react-native';
 import { useSpacing } from '../../../hooks/useSpacing';
 import { useDopebase } from '../../../theming';
 import dynamicStyles from './styles';
+import { truncateText } from '../../../../../helpers/truncateText';
 
 const Text = props => {
   const {
@@ -18,6 +19,7 @@ const Text = props => {
     styles,
     theme,
     appearance,
+    truncateTextNumber
   } = props;
 
   const spacingStyles = useSpacing(props);
@@ -34,7 +36,7 @@ const Text = props => {
     bold && { fontWeight: 'bold' },
   ];
 
-  return <RNText style={textStyles}>{children}</RNText>;
+  return <RNText style={textStyles}>{truncateTextNumber ? truncateText(children, truncateTextNumber) : children}</RNText>;
 };
 
 export default memo(useDopebase(Text, dynamicStyles));

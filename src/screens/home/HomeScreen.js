@@ -7,9 +7,8 @@ import {
   useTranslations,
   TouchableIcon,
   ProfilePictureUpdate,
-  Button,
+  ActivityIndicator,
 } from '../../core/dopebase';
-import FastImage from 'react-native-fast-image';
 import dynamicStyles from './styles';
 import { useCurrentUser } from '../../core/onboarding';
 import { useAuth } from '../../core/onboarding/hooks/useAuth';
@@ -19,6 +18,9 @@ import { WorkoutSvg, MealSvg } from '../../assets/images/svg';
 import ConsumWater from './ConsumWater';
 
 import plusIcon from '../../assets/icons/add.png';
+import CrouselStep from './CarouselStep';
+import PlanView from './PlanView';
+import MusicList from '../../components/MusicList';
 
 export const HomeScreen = memo(props => {
   const { navigation } = props
@@ -28,10 +30,12 @@ export const HomeScreen = memo(props => {
   const { theme, appearance } = useTheme()
   const colorSet = theme.colors[appearance]
   const styles = dynamicStyles(theme, appearance)
-  let currentDate;
   let iconsSize = Dimensions.get('screen').width * 0.07;
 
+  const [isLoading, setIsLoading] = useState(true);
   const [profilePictureFile, setProfilePictureFile] = useState(null);
+  const [currentDate, setCurrentDate] = useState(null);
+
 
   const handlePress = () => {
     Alert.alert('Ố la la', 'This feature is not implemented yet')
@@ -42,16 +46,19 @@ export const HomeScreen = memo(props => {
     console.log(timeFormat(timeStamp));
     const fetchCurrentDate = async () => {
       try {
-        currentDate = await getCurrentDateFormatted;
+        tempdata = await getCurrentDateFormatted;
+        setCurrentDate(tempdata);
       } catch (error) {
         console.error('Error fetching current date:', error);
       }
     };
     fetchCurrentDate();
-  }, []);
+    if (currentDate) {
+      setIsLoading(false);
+    }
+  }, [currentDate]);
 
   useLayoutEffect(() => {
-
     navigation.setOptions({
       // headerTitle: localized('Home'),
       headerLeft: () => (
@@ -88,7 +95,7 @@ export const HomeScreen = memo(props => {
       },
       headerTintColor: colorSet.primaryText,
     })
-  }, [])
+  }, [currentDate])
 
   useEffect(() => {
     if (!currentUser?.id) {
@@ -108,9 +115,18 @@ export const HomeScreen = memo(props => {
     })
   }, [currentUser])
 
+  if (isLoading == true) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator />
+      </View>
+    )
+  };
+
   return (
     <ScrollView
       style={{ backgroundColor: colorSet.primaryBackground }}
+      showsVerticalScrollIndicator={false}
     >
       <HeadingBlock localized={localized} text={"Today"} />
       <CustomView mh5 style={{ flexDirection: 'row', gap: 16 }}>
@@ -146,7 +162,7 @@ export const HomeScreen = memo(props => {
           <ConsumWater />
         </CustomView>
       </CustomView>
-      <CustomView mt5>
+      <CustomView mt5 mb4>
         <CustomView mh5 br4 pv5 style={styles.updateAppearanceContainer}>
           <View>
             <ProfilePictureUpdate setProfilePictureFile={setProfilePictureFile} />
@@ -167,22 +183,14 @@ export const HomeScreen = memo(props => {
           tintColor={colorSet.primaryText}
         />
       </CustomView>
-      <CustomView ph5 mb8>
-        <CustomView mv3 pv4 br4 style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-around',
-          backgroundColor: "#CCCCCC",
-        }}>
-          <CustomText h3>{localized("Nutrition Plan")}</CustomText>
-          <Button text={localized("View")} onPress={handlePress} radius={16} containerStyle={{
-            paddingLeft: 25,
-            paddingRight: 25,
-            paddingTop: 10,
-            paddingBottom: 10
-          }} />
-        </CustomView>
+      <PlanView text={"Nutrition Plan"} onPress={handlePress} />
+      <HeadingBlock localized={localized} text={"Workout Plan"} text2={"25/02"} />
+      <CustomView ph5 mb3>
+        <CrouselStep />
       </CustomView>
+      <PlanView text={"Workout Plan"} onPress={handlePress} />
+      <HeadingBlock localized={localized} text={"Workout Plan"} text2={"View More"} onPress={handlePress} />
+      <MusicList playBtn={true} />
     </ScrollView>
   )
 })

@@ -2,7 +2,9 @@ import React from 'react';
 import { Platform, Image, Dimensions } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useTranslations } from '../core/dopebase';
-import { HomeScreen } from '../screens';
+import { HomeScreen, MealScreen } from '../screens';
+import WorkoutStackNavigator from './WorkoutStackNavigator';
+import MentalStackNavigator from './MentalStackNavigator';
 import { useOnboardingConfig } from '../core/onboarding/hooks/useOnboardingConfig';
 import { useTheme } from '../core/dopebase';
 
@@ -52,15 +54,15 @@ const MainStackNavigator = () => {
           // borderTopEndRadius: 15,
           // borderTopStartRadius: 15,
         },
-        
+
       })
       }
-      initialRouteName="Home"
+      initialRouteName="Mental"
     >
       <MainStack.Screen name="Home" component={HomeScreen} options={{ headerTitle: '' }} />
-      <MainStack.Screen name="Meal" component={HomeScreen} options={{ headerTitle: '' }} />
-      <MainStack.Screen name="WorkOut" component={HomeScreen} options={{ headerTitle: '' }} />
-      <MainStack.Screen name="Mental" component={HomeScreen} options={{ headerTitle: '' }} />
+      <MainStack.Screen name="Meal" component={MealScreen} options={{ headerShown: false }} />
+      <MainStack.Screen name="WorkOut" component={WorkoutStackNavigator} options={{ headerShown: false }} />
+      <MainStack.Screen name="Mental" component={MentalStackNavigator} options={{ headerShown: false }} />
       <MainStack.Screen name="Statistical" component={HomeScreen} options={{ headerTitle: '' }} />
     </MainStack.Navigator>
   )

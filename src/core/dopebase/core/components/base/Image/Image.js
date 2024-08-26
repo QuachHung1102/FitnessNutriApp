@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image } from 'react-native';
+import { ImageBackground } from 'react-native';
 import { useDopebase } from '../../../theming';
 import { View } from '../View';
 import dynamicStyles from './styles';
@@ -10,9 +10,9 @@ const DNImage = props => {
 
   return (
     <View {...props}>
-      <Image source={source} style={viewStyles}>
+      <ImageBackground source={source} style={viewStyles}>
         {children}
-      </Image>
+      </ImageBackground>
     </View>
   );
 };

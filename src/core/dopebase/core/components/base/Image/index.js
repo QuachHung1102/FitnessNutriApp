@@ -1,2 +1,3 @@
 import Image from './Image';
-export { Image };
+import ImageR from './ImageR';
+export { Image, ImageR };

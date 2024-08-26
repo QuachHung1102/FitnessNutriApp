@@ -8,7 +8,7 @@ import { TextInput } from './components/base/TextInput'
 import { SearchBar } from './components/base/SearchBar'
 import { View } from './components/base/View'
 import { KeyboardAvoidingView } from './components/base/KeyboardAvoidingView'
-import { Image } from './components/base/Image'
+import { Image, ImageR } from './components/base/Image'
 import { Switch } from './components/base/Switch'
 import { Radio } from './components/base/Radio'
 import {
@@ -35,6 +35,7 @@ export {
   Button,
   Card,
   Image,
+  ImageR,
   SearchBar,
   Toast,
   Text,
