@@ -19,7 +19,7 @@ export const TranslationProvider = ({ children, translations }) => {
       return i18n.t(key, { ...config, locale }).includes('missing')
         ? key
         : i18n.t(key, { ...config, locale })
-    },
+    },  
     [locale],
   );
 

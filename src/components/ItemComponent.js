@@ -1,11 +1,13 @@
-import React, { memo } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { Dimensions, StyleSheet } from 'react-native';
 import { View, Text, ImageR, TouchableIcon, useTheme, Switch } from '../core/dopebase';
+import { onCreateTriggerNotification } from '../core/helpers/notifee';
 
 const ItemComponent = (props) => {
   const { theme, appearance } = useTheme();
   const colorSet = theme.colors[appearance];
   const {
+    itemID,
     style,
     imgSource,
     onPress,
@@ -19,6 +21,24 @@ const ItemComponent = (props) => {
     switchActive,
     localized
   } = props;
+
+  const [notiEnabled, setNotiEnabled] = useState(false);
+
+  useEffect(() => {
+    if (notiEnabled) {
+      handleCreateNotification();
+    }
+  }, [notiEnabled])
+
+  const handleCreateNotification = useCallback(async () => {
+    const isValid = await onCreateTriggerNotification(foodName, timeE);
+    if (isValid) {
+      Alert.alert(`Thông báo đã được tạo thành công vào: `, isValid);
+    } else {
+      Alert.alert('Thời gian không hợp lệ!', 'Vui lòng chọn thời gian trong tương lai.');
+    }
+  }, [foodName, timeE]);
+
   return (
     <View style={[styles.itemContainer, styles.flexRow]}>
       <View style={[styles.flexRow, styles.itemLeft]}>
@@ -34,7 +54,7 @@ const ItemComponent = (props) => {
       </View>
       {switchActive
         ? (
-          <Switch />
+          <Switch onToggleSwitch={setNotiEnabled} />
         ) : (
           <TouchableIcon
             onPress={onPress}

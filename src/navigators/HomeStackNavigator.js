@@ -57,7 +57,7 @@ const MainStackNavigator = () => {
 
       })
       }
-      initialRouteName="Mental"
+      initialRouteName="Home"
     >
       <MainStack.Screen name="Home" component={HomeScreen} options={{ headerTitle: '' }} />
       <MainStack.Screen name="Meal" component={MealScreen} options={{ headerShown: false }} />

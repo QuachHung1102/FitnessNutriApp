@@ -14,6 +14,7 @@ const ItemList = (props) => {
   const renderItem = ({ item }) => {
     return (
       <ItemComponent
+        itemID={item.id}
         localized={localized}
         style={styles.imgStyle}
         rounded={true}

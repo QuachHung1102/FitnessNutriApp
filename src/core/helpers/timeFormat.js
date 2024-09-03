@@ -1,11 +1,11 @@
-import moment from 'moment';
+import moment from 'moment'
+import 'moment/min/locales'
 import Storage from '@react-native-async-storage/async-storage';
-import { useMemo } from 'react';
 
 const date = new Date();
 date.getTime() / 1000;
 
-const getLocale = async () => {
+export const getLocale = async () => {
   try {
     const locale = await Storage.getItem('locale');
     if (locale !== null) {

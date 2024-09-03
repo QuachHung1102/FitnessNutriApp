@@ -1,10 +1,11 @@
 import * as en from './en.json'
 import * as fr from './fr.json'
-import * as vn from './vn.json'
+import * as vi from './vi.json'
 
 export default {
-  en,
-  fr,
+  'en': en,
+  'fr': fr,
+  'vi': vi,
   'fr-US': fr,
-  'vi-VN': vn,
+  'vi-VN': vi,
 }
