@@ -3,7 +3,8 @@ import notifee, {
   EventType,
   TriggerType,
   TimestampTrigger,
-  RepeatFrequency
+  RepeatFrequency,
+  AlarmType
 } from '@notifee/react-native';
 import moment from 'moment';
 import 'moment-timezone';
@@ -163,7 +164,8 @@ export async function onCreateTriggerNotification(foodName, timeE) {
     const trigger = {
       type: TriggerType.TIMESTAMP,
       timestamp: date.valueOf(), // Lấy timestamp từ đối tượng moment
-      repeatFrequency: RepeatFrequency.DAILY
+      repeatFrequency: RepeatFrequency.DAILY,
+      alarmManager: true,
     };
 
     // Tạo thông báo với trigger đã tạoF

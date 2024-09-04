@@ -1,13 +1,16 @@
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
-import { Dimensions, StyleSheet } from 'react-native';
+import React, { memo, useCallback, useEffect, useState } from 'react';
+import { Alert, Dimensions, StyleSheet } from 'react-native';
 import { View, Text, ImageR, TouchableIcon, useTheme, Switch } from '../core/dopebase';
 import { onCreateTriggerNotification } from '../core/helpers/notifee';
+import updateDeviceStorage from '../core/helpers/updateDeviceStorage';
 
 const ItemComponent = (props) => {
   const { theme, appearance } = useTheme();
   const colorSet = theme.colors[appearance];
   const {
+    dataIndex,
     itemID,
+    dataDeviceKey,
     style,
     imgSource,
     onPress,
@@ -18,26 +21,45 @@ const ItemComponent = (props) => {
     foodName,
     timeE,
     calo,
+    onNoti,
     switchActive,
     localized
   } = props;
 
-  const [notiEnabled, setNotiEnabled] = useState(false);
+  const [notiEnabled, setNotiEnabled] = useState(onNoti);
 
   useEffect(() => {
     if (notiEnabled) {
       handleCreateNotification();
+      handleupdateDeviceStorage();
+    } else {
+      handleupdateDeviceStorage();
     }
+    console.log(`notiEnabled is: ${notiEnabled}`);
   }, [notiEnabled])
 
   const handleCreateNotification = useCallback(async () => {
     const isValid = await onCreateTriggerNotification(foodName, timeE);
     if (isValid) {
-      Alert.alert(`Thông báo đã được tạo thành công vào: `, isValid);
+      // Alert.alert(`Thông báo đã được tạo thành công vào: `, isValid);
     } else {
       Alert.alert('Thời gian không hợp lệ!', 'Vui lòng chọn thời gian trong tương lai.');
     }
   }, [foodName, timeE]);
+
+  const handleupdateDeviceStorage = useCallback(async () => {
+    try {
+      let mealScreenData = await updateDeviceStorage.getStoreData(dataDeviceKey);
+      mealScreenData[dataIndex].dishs[itemID].onNoti = notiEnabled;
+      console.log("trạng thái data trước khi lưu", mealScreenData[dataIndex].dishs[itemID].onNoti);
+      await updateDeviceStorage.setStoreData(dataDeviceKey, mealScreenData);
+      console.log(`Lưu thành công`);
+      let mealScreenData2 = await updateDeviceStorage.getStoreData(dataDeviceKey);
+      console.log(mealScreenData2[dataIndex].dishs[itemID].onNoti);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dataDeviceKey, dataIndex, itemID])
 
   return (
     <View style={[styles.itemContainer, styles.flexRow]}>
@@ -54,7 +76,7 @@ const ItemComponent = (props) => {
       </View>
       {switchActive
         ? (
-          <Switch onToggleSwitch={setNotiEnabled} />
+          <Switch onToggleSwitch={setNotiEnabled} value={onNoti} />
         ) : (
           <TouchableIcon
             onPress={onPress}

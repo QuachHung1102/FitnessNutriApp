@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useLayoutEffect, useCallback, useState, useMemo } from 'react';
+import React, { memo, useEffect, useLayoutEffect, useCallback, useState } from 'react';
 import { Dimensions, ScrollView } from 'react-native';
 import { useTheme, useTranslations, SearchBar, Alert, View, Text, ActivityIndicator } from '../../core/dopebase';
 import dynamicStyles from './styles';
@@ -8,6 +8,7 @@ import HeadingBlock from '../../components/HeadingBlock';
 import ConsumeList from './ConsumeList';
 import ItemList from '../../components/ItemList';
 import NotifeeBtn from '../../core/dopebase/core/components/base/Notifee/NotifeeBtn';
+import updateDeviceStorage from '../../core/helpers/updateDeviceStorage';
 
 const data1 = [
   { id: 1, name: 'Calories', value: 300, unit: 'kcal', progress: '70%' },
@@ -20,29 +21,29 @@ const data2 = [
   {
     title: "Breakfast",
     dishs: [
-      { id: '1', name: 'Phở Bò', time: "07:00 am", calo: 215, imgSource: require('../../assets/images/foodImg/phoBo.png') },
-      { id: '2', name: 'Cafe đen', time: "07:30 am", calo: 75, imgSource: require('../../assets/images/foodImg/caPheDenDa.png') },
+      { id: '1', name: 'Phở Bò', time: "07:00 am", calo: 215, onNoti: true, imgSource: require('../../assets/images/foodImg/phoBo.png') },
+      { id: '2', name: 'Cafe đen', time: "07:30 am", calo: 75, onNoti: true, imgSource: require('../../assets/images/foodImg/caPheDenDa.png') },
     ]
   },
   {
     title: "Lunch", time: "07:00 am",
     dishs: [
-      { id: '1', name: 'Phở Bò', time: "11:30 am", calo: 215, imgSource: require('../../assets/images/foodImg/phoBo.png') },
-      { id: '2', name: 'Cafe đen', time: "12:00 am", calo: 75, imgSource: require('../../assets/images/foodImg/caPheDenDa.png') },
+      { id: '1', name: 'Phở Bò', time: "11:30 am", calo: 215, onNoti: false, imgSource: require('../../assets/images/foodImg/phoBo.png') },
+      { id: '2', name: 'Cafe đen', time: "12:00 am", calo: 75, onNoti: false, imgSource: require('../../assets/images/foodImg/caPheDenDa.png') },
     ]
   },
   {
     title: "Dinner", time: "07:00 am",
     dishs: [
-      { id: '1', name: 'Phở Bò', time: "19:00 pm", calo: 215, imgSource: require('../../assets/images/foodImg/phoBo.png') },
-      { id: '2', name: 'Cafe đen', time: "19:30 pm", calo: 75, imgSource: require('../../assets/images/foodImg/caPheDenDa.png') },
+      { id: '1', name: 'Phở Bò', time: "19:00 pm", calo: 215, onNoti: false, imgSource: require('../../assets/images/foodImg/phoBo.png') },
+      { id: '2', name: 'Cafe đen', time: "19:30 pm", calo: 75, onNoti: false, imgSource: require('../../assets/images/foodImg/caPheDenDa.png') },
     ]
   },
   {
     title: "Snack", time: "07:00 am",
     dishs: [
-      { id: '1', name: 'Phở Bò', time: "22:00 am", calo: 215, imgSource: require('../../assets/images/foodImg/phoBo.png') },
-      { id: '2', name: 'Cafe đen', time: "23:00 am", calo: 75, imgSource: require('../../assets/images/foodImg/caPheDenDa.png') },
+      { id: '1', name: 'Phở Bò', time: "22:00 am", calo: 215, onNoti: false, imgSource: require('../../assets/images/foodImg/phoBo.png') },
+      { id: '2', name: 'Cafe đen', time: "23:00 am", calo: 75, onNoti: false, imgSource: require('../../assets/images/foodImg/caPheDenDa.png') },
     ]
   }
 ];
@@ -60,8 +61,8 @@ export const MealScreen = memo(props => {
   const [isLoading, setIsLoading] = useState(true);
   const [mealTimeItems, setMealTimeItems] = useState([]);
   const [text, setText] = useState('');
-  const consumeList = useMemo(() => data1, []);
-  const mealTimeList = useMemo(() => data2, []);
+  const [consumeList, setConsumeList] = useState(data1);
+  const [mealTimeList, setMealTimeList] = useState(data2);
 
   const handlePress = useCallback(() => {
     Alert.alert('Ố la la', 'This feature is not implemented yet');
@@ -71,6 +72,17 @@ export const MealScreen = memo(props => {
     const fetchData = async () => {
       // Giả lập độ trễ tải dữ liệu
       await new Promise(resolve => setTimeout(resolve, 1000));
+      let mealScreenData = await updateDeviceStorage.getStoreData('MealScreenData');
+
+      try {
+        if (mealScreenData) {
+          setMealTimeList(mealScreenData);
+        } else {
+          updateDeviceStorage.setStoreData('MealScreenData', mealTimeList);
+        }
+      } catch (error) {
+        console.log(error);
+      }
 
       const items = mealTimeList.map((meal) => {
         return {
@@ -87,7 +99,7 @@ export const MealScreen = memo(props => {
     };
 
     fetchData();
-  }, [mealTimeList, consumeList]);
+  }, []);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -154,11 +166,11 @@ export const MealScreen = memo(props => {
         {mealTimeItems.map((item, index) => (
           <React.Fragment key={index}>
             <HeadingBlock localized={localized} text={mealTimeList[index].title} text2={`${item.number} món | ${item.totalCalo} calories`} />
-            <ItemList data={mealTimeList[index]} onPress={handlePress} iconPng={iconPng} />
+            <ItemList data={mealTimeList[index]} dataIndex={index} dataDeviceKey={'MealScreenData'} onPress={handlePress} iconPng={iconPng} />
           </React.Fragment>
         ))}
         <View>
-          <NotifeeBtn containerStyles={{width: Dimensions.get('window') * 0.3}}/> 
+          <NotifeeBtn containerStyles={{ width: Dimensions.get('window') * 0.3 }} />
         </View>
       </ScrollView>
     );
