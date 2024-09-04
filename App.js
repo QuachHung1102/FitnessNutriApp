@@ -17,6 +17,7 @@ import { AuthProvider } from './src/core/onboarding/hooks/useAuth';
 import { authManager } from './src/core/onboarding/api';
 
 import MobileTheme from './src/theme'; // Import your theme here
+import { bootstrap } from './src/core/helpers/notifee';
 
 const store = configureStore();
 
@@ -24,6 +25,9 @@ const App = () => {
   const theme = extendTheme(MobileTheme);
 
   useEffect(() => {
+    // bootstrap()
+    //   .then()
+    //   .catch(console.error)
     SplashScreen.hide()
     LogBox.ignoreAllLogs(true)
   }, [])

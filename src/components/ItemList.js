@@ -5,7 +5,14 @@ import { useTranslations, useTheme } from '../core/dopebase';
 import ItemComponent from './ItemComponent';
 
 const ItemList = (props) => {
-  const { data, onPress, iconPng, switchActive } = props;
+  const {
+    data,
+    dataIndex,
+    dataDeviceKey,
+    onPress,
+    iconPng,
+    switchActive
+  } = props;
   const { localized } = useTranslations();
   const { theme, appearance } = useTheme();
   const colorSet = theme.colors[appearance];
@@ -14,6 +21,9 @@ const ItemList = (props) => {
   const renderItem = ({ item }) => {
     return (
       <ItemComponent
+        dataIndex={dataIndex}
+        itemID={item.id}
+        dataDeviceKey={dataDeviceKey}
         localized={localized}
         style={styles.imgStyle}
         rounded={true}
@@ -26,6 +36,7 @@ const ItemList = (props) => {
         foodName={item.name}
         timeE={item.time}
         calo={item.calo}
+        onNoti={item.onNoti}
         switchActive
       />
     );

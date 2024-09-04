@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useLayoutEffect, useCallback, useState } from 'react';
+import React, { memo, useEffect, useLayoutEffect, useCallback, useState, useMemo } from 'react';
 import { Dimensions, ScrollView, Alert } from 'react-native';
 import {
   View,
@@ -11,7 +11,7 @@ import {
 import dynamicStyles from './styles';
 import { useCurrentUser } from '../../core/onboarding';
 import { useAuth } from '../../core/onboarding/hooks/useAuth';
-import { timeFormat, getUnixTimeStamp, getCurrentDateFormatted } from '../../core/helpers/timeFormat';
+import { getUnixTimeStamp, getCurrentDateFormatted } from '../../core/helpers/timeFormat';
 import HeadingBlock from '../../components/HeadingBlock';
 import ItemList from '../../components/ItemList';
 import ImproveMoodList from './ImproveMoodList';
@@ -25,7 +25,7 @@ const data1 = [
   { id: '3', text1: "Listen", imgSource: require('../../assets/images/workoutImg/discover2.png') },
   { id: '4', text1: "Read", imgSource: require('../../assets/images/workoutImg/discover3.png') },
   { id: '5', text1: "Write", imgSource: require('../../assets/images/workoutImg/discover4.png') },
-]
+];
 
 const data2 = {
   title: "Workout",
@@ -43,7 +43,6 @@ const data3 = [
   { id: 4, emo: "17%", time: '13:34', color: "rgba(255, 31, 17, 0.75)", img: require('../../assets/gifs/tucGian.gif') },
 ];
 
-
 export const MentalScreen = memo(props => {
   const { navigation } = props;
   const currentUser = useCurrentUser();
@@ -53,39 +52,39 @@ export const MentalScreen = memo(props => {
   const colorSet = theme.colors[appearance];
   const styles = dynamicStyles(theme, appearance);
   const iconPng = require('../../assets/icons/right-arrow.png');
+  const discoverData = useMemo(() => data1);
+  const workoutData = useMemo(() => data2);
+  const emoData = useMemo(() => data3);
 
   const [isLoading, setIsLoading] = useState(true);
   const [currentDate, setCurrentDate] = useState(null);
   const [emotionData, setEmotionData] = useState(null);
-  let mealTimeList = data2;
 
-  const handlePress = () => {
-    Alert.alert('Ố la la', 'This feature is not implemented yet')
-  };
+  const handlePress = useCallback(() => {
+    Alert.alert('Ố la la', 'This feature is not implemented yet');
+  }, []);
 
   useEffect(() => {
-    const timeStamp = getUnixTimeStamp();
-    console.log(timeFormat(timeStamp));
     const fetchCurrentDate = async () => {
+      await new Promise(resolve => setTimeout(resolve, 1000));
       try {
-        tempdata = await getCurrentDateFormatted;
+        const tempdata = await getCurrentDateFormatted;
         setCurrentDate(tempdata);
       } catch (error) {
         console.error('Error fetching current date:', error);
       }
     };
     fetchCurrentDate();
-    if (data3) {
-      setEmotionData(data3);
-    }
-    if (currentDate && emotionData && data1) {
-      setIsLoading(false);
-    };
+    setEmotionData(emoData);
+  }, []);
 
-  }, [mealTimeList, currentDate]);
+  useEffect(() => {
+    if (currentDate && emotionData && discoverData) {
+      setIsLoading(false);
+    }
+  }, [currentDate, emotionData, discoverData]);
 
   useLayoutEffect(() => {
-
     navigation.setOptions({
       headerTitle: '',
       headerLeft: () => (
@@ -106,68 +105,53 @@ export const MentalScreen = memo(props => {
           </View>
         </View>
       ),
-
       headerStyle: {
         backgroundColor: colorSet.primaryBackground,
         borderBottomColor: colorSet.hairline,
         height: 100,
       },
       headerTintColor: colorSet.primaryText,
-    })
-  }, [currentDate])
+    });
+  }, [currentDate, navigation, colorSet, localized, styles, theme.icons.userDefault]);
 
   useEffect(() => {
     if (!currentUser?.id) {
-      return
+      return;
     }
-  }, [currentUser?.id])
+  }, [currentUser?.id]);
 
   const onLogout = useCallback(() => {
-    authManager?.logout(currentUser)
+    authManager?.logout(currentUser);
     navigation.reset({
       index: 0,
-      routes: [
-        {
-          name: 'LoadScreen',
-        },
-      ],
-    })
-  }, [currentUser])
+      routes: [{ name: 'LoadScreen' }],
+    });
+  }, [authManager, currentUser, navigation]);
 
-  if (isLoading == true) {
+  if (isLoading) {
     return (
       <View style={styles.container}>
         <ActivityIndicator />
       </View>
-    )
-  };
-
-  return (
-    <ScrollView
-      style={{ backgroundColor: colorSet.primaryBackground }}
-      showsVerticalScrollIndicator={false}
-    >
-      <View mh5 mv5>
-        <Text h3>{localized('Improve Mood')}</Text>
-      </View>
-      <View ph5 mb3>
-        <ImproveMoodList />
-      </View>
-      <EmotionChart emotionData={emotionData} />
-      <EmotionStatus localized={localized} onPress={handlePress} />
-      <HeadingBlock localized={localized} text={"Your Plan"} text2={"View More"} onPress={handlePress} />
-      <ItemList data={data2} onPress={handlePress} iconPng={iconPng} switchActive={true} />
-      <Discover data={data1} />
-    </ScrollView>
-  )
-})
-
-{/* 
-  <FastImage
-    style={styles.image}
-    source={{ uri: currentUser?.profilePictureURL }}
-  />
-  <Text style={styles.text}>
-    {localized('Logged in as')} {currentUser?.email}
-  </Text> 
-*/}
+    );
+  } else {
+    return (
+      <ScrollView
+        style={{ backgroundColor: colorSet.primaryBackground }}
+        showsVerticalScrollIndicator={false}
+      >
+        <View mh5 mv5>
+          <Text h3>{localized('Improve Mood')}</Text>
+        </View>
+        <View ph5 mb3>
+          <ImproveMoodList />
+        </View>
+        <EmotionChart emotionData={emotionData} />
+        <EmotionStatus localized={localized} onPress={handlePress} />
+        <HeadingBlock localized={localized} text={"Your Plan"} text2={"View More"} onPress={handlePress} />
+        <ItemList data={workoutData} onPress={handlePress} iconPng={iconPng} switchActive={true} />
+        <Discover data={discoverData} />
+      </ScrollView>
+    );
+  }
+});
