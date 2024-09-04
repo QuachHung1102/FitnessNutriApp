@@ -11,39 +11,39 @@ import NotifeeBtn from '../../core/dopebase/core/components/base/Notifee/Notifee
 import updateDeviceStorage from '../../core/helpers/updateDeviceStorage';
 
 const data1 = [
-  { id: 1, name: 'Calories', value: 300, unit: 'kcal', progress: '70%' },
-  { id: 2, name: 'Proteins', value: 30, unit: 'g', progress: '10%' },
-  { id: 3, name: 'Fats', value: 0, unit: 'g', progress: '0%' },
-  { id: 4, name: 'Carbs', value: 100, unit: 'g', progress: '20%' },
+  { id: 0, name: 'Calories', value: 300, unit: 'kcal', progress: '70%' },
+  { id: 1, name: 'Proteins', value: 30, unit: 'g', progress: '10%' },
+  { id: 2, name: 'Fats', value: 0, unit: 'g', progress: '0%' },
+  { id: 3, name: 'Carbs', value: 100, unit: 'g', progress: '20%' },
 ];
 
 const data2 = [
   {
     title: "Breakfast",
     dishs: [
-      { id: '1', name: 'Phở Bò', time: "07:00 am", calo: 215, onNoti: true, imgSource: require('../../assets/images/foodImg/phoBo.png') },
-      { id: '2', name: 'Cafe đen', time: "07:30 am", calo: 75, onNoti: true, imgSource: require('../../assets/images/foodImg/caPheDenDa.png') },
+      { id: '0', name: 'Phở Bò', time: "07:00 am", calo: 215, onNoti: true, imgSource: require('../../assets/images/foodImg/phoBo.png') },
+      { id: '1', name: 'Cafe đen', time: "07:30 am", calo: 75, onNoti: true, imgSource: require('../../assets/images/foodImg/caPheDenDa.png') },
     ]
   },
   {
     title: "Lunch", time: "07:00 am",
     dishs: [
-      { id: '1', name: 'Phở Bò', time: "11:30 am", calo: 215, onNoti: false, imgSource: require('../../assets/images/foodImg/phoBo.png') },
-      { id: '2', name: 'Cafe đen', time: "12:00 am", calo: 75, onNoti: false, imgSource: require('../../assets/images/foodImg/caPheDenDa.png') },
+      { id: '0', name: 'Phở Bò', time: "11:30 am", calo: 215, onNoti: false, imgSource: require('../../assets/images/foodImg/phoBo.png') },
+      { id: '1', name: 'Cafe đen', time: "12:00 am", calo: 75, onNoti: false, imgSource: require('../../assets/images/foodImg/caPheDenDa.png') },
     ]
   },
   {
     title: "Dinner", time: "07:00 am",
     dishs: [
-      { id: '1', name: 'Phở Bò', time: "19:00 pm", calo: 215, onNoti: false, imgSource: require('../../assets/images/foodImg/phoBo.png') },
-      { id: '2', name: 'Cafe đen', time: "19:30 pm", calo: 75, onNoti: false, imgSource: require('../../assets/images/foodImg/caPheDenDa.png') },
+      { id: '0', name: 'Phở Bò', time: "19:00 pm", calo: 215, onNoti: false, imgSource: require('../../assets/images/foodImg/phoBo.png') },
+      { id: '1', name: 'Cafe đen', time: "19:30 pm", calo: 75, onNoti: false, imgSource: require('../../assets/images/foodImg/caPheDenDa.png') },
     ]
   },
   {
     title: "Snack", time: "07:00 am",
     dishs: [
-      { id: '1', name: 'Phở Bò', time: "22:00 am", calo: 215, onNoti: false, imgSource: require('../../assets/images/foodImg/phoBo.png') },
-      { id: '2', name: 'Cafe đen', time: "23:00 am", calo: 75, onNoti: false, imgSource: require('../../assets/images/foodImg/caPheDenDa.png') },
+      { id: '0', name: 'Phở Bò', time: "22:00 am", calo: 215, onNoti: false, imgSource: require('../../assets/images/foodImg/phoBo.png') },
+      { id: '1', name: 'Cafe đen', time: "23:00 am", calo: 75, onNoti: false, imgSource: require('../../assets/images/foodImg/caPheDenDa.png') },
     ]
   }
 ];
