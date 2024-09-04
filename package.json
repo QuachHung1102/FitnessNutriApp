@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@expo/metro-config": "^0.18.11",
     "@expo/react-native-action-sheet": "^4.1.0",
     "@gorhom/bottom-sheet": "^4.6.3",
     "@invertase/react-native-apple-authentication": "^1.1.2",
