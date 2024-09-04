@@ -36,21 +36,20 @@ const ItemComponent = ({
   // Memo hóa hàm cập nhật device storage
   const handleupdateDeviceStorage = useCallback(async () => {
     try {
-      let mealScreenData = await updateDeviceStorage.getStoreData(
-        dataDeviceKey,
-      );
+      let data = await updateDeviceStorage.getStoreData(dataDeviceKey);
       if (
-        !mealScreenData ||
-        !mealScreenData[dataIndex] ||
-        !mealScreenData[dataIndex].dishs ||
-        !mealScreenData[dataIndex].dishs[itemID]
+        !data ||
+        !data[dataIndex] ||
+        !data[dataIndex].dishs ||
+        !data[dataIndex].dishs[itemID]
       ) {
-        console.log('Invalid data structure:', JSON.stringify(mealScreenData));
+        console.log('Invalid data structure:', JSON.stringify(data));
         return;
       }
-      mealScreenData[dataIndex].dishs[itemID].onNoti = notiEnabled;
-      await updateDeviceStorage.setStoreData(dataDeviceKey, mealScreenData);
-      console.log(`Lưu thành công`);
+      data[dataIndex].dishs[itemID].onNoti = notiEnabled;
+      await updateDeviceStorage.setStoreData(dataDeviceKey, data);
+      let data2 = await updateDeviceStorage.getStoreData(dataDeviceKey);
+      console.log(`Lưu thành công: ${data2[dataIndex].dishs[itemID].onNoti}`);
     } catch (error) {
       console.error(error);
     }
@@ -69,6 +68,9 @@ const ItemComponent = ({
 
   // Xử lý cập nhật thông báo khi notiEnabled thay đổi
   useEffect(() => {
+    if (!switchActive) {
+      return;
+    }
     console.log(`notiEnabled is: ${notiEnabled}`);
     handleupdateDeviceStorage();
     if (notiEnabled) {

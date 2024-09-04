@@ -29,7 +29,7 @@ const ItemList = props => {
         timeE={item.time}
         calo={item.calo}
         onNoti={item.onNoti}
-        switchActive
+        switchActive={switchActive}
       />
     );
   };
