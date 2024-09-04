@@ -29,36 +29,37 @@ const ItemComponent = (props) => {
   const [notiEnabled, setNotiEnabled] = useState(onNoti);
 
   useEffect(() => {
-    const handleupdateDeviceStorage = async () => {
-      try {
-        let mealScreenData = await updateDeviceStorage.getStoreData(dataDeviceKey);
-        if (mealScreenData[dataIndex] && mealScreenData[dataIndex].dishs[itemID]) {
-          mealScreenData[dataIndex].dishs[itemID].onNoti = notiEnabled;
-          console.log("trạng thái data trước khi lưu", mealScreenData[dataIndex].dishs[itemID].onNoti);
-          await updateDeviceStorage.setStoreData(dataDeviceKey, mealScreenData);
-          console.log(`Lưu thành công`);
-          let mealScreenData2 = await updateDeviceStorage.getStoreData(dataDeviceKey);
-          console.log(mealScreenData2[dataIndex].dishs[itemID].onNoti);
-        } else {
-          console.error('Data không hợp lệ');
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
     console.log(`notiEnabled is: ${notiEnabled}`);
-    handleupdateDeviceStorage();
-  }, [notiEnabled, dataDeviceKey, dataIndex, itemID]);
+    if (notiEnabled) {
+      handleCreateNotification();
+      handleupdateDeviceStorage();
+    } else {
+      handleupdateDeviceStorage();
+    }
+  }, [notiEnabled])
 
-  const handleCreateNotification = useCallback(async () => {
+  const handleCreateNotification = async () => {
     const isValid = await onCreateTriggerNotification(foodName, timeE);
     if (isValid) {
-      console.log(`Create trigger notification at ${timeE}`);
+      // Alert.alert(`Thông báo đã được tạo thành công vào: `, isValid);
     } else {
       Alert.alert('Thời gian không hợp lệ!', 'Vui lòng chọn thời gian trong tương lai.');
     }
-  }, [foodName, timeE]);
+  }
+
+  const handleupdateDeviceStorage = async () => {
+    try {
+      let mealScreenData = await updateDeviceStorage.getStoreData(dataDeviceKey);
+      mealScreenData[dataIndex].dishs[itemID].onNoti = notiEnabled;
+      console.log("trạng thái data trước khi lưu", mealScreenData[dataIndex].dishs[itemID].onNoti);
+      await updateDeviceStorage.setStoreData(dataDeviceKey, mealScreenData);
+      console.log(`Lưu thành công`);
+      let mealScreenData2 = await updateDeviceStorage.getStoreData(dataDeviceKey);
+      console.log(mealScreenData2[dataIndex].dishs[itemID].onNoti);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <View style={[styles.itemContainer, styles.flexRow]}>
@@ -75,7 +76,7 @@ const ItemComponent = (props) => {
       </View>
       {switchActive
         ? (
-          <Switch onToggleSwitch={setNotiEnabled} value={notiEnabled} />
+          <Switch onToggleSwitch={setNotiEnabled} value={onNoti} />
         ) : (
           <TouchableIcon
             onPress={onPress}
@@ -106,3 +107,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   }
 });
+
+// { onPress,
+// containerStyle,
+// iconSource,
+// imageStyle,
+// title,
+// titleStyle,
+// renderTitle,
+// onLongPress,
+// onPressOut,
+// onPressIn,
+// iconRef,
+// onLayout,
+// disabled = false,
+// tintColor,}
