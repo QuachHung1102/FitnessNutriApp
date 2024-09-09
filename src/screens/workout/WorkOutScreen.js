@@ -1,5 +1,5 @@
-import React, {memo, useEffect, useCallback, useState, useMemo} from 'react';
-import {Dimensions, ScrollView, Alert} from 'react-native';
+import React, { memo, useEffect, useCallback, useState, useMemo } from 'react';
+import { Dimensions, ScrollView, Alert } from 'react-native';
 import {
   View,
   Text,
@@ -9,8 +9,8 @@ import {
   ActivityIndicator,
 } from '../../core/dopebase';
 import dynamicStyles from './styles';
-import {useCurrentUser} from '../../core/onboarding';
-import {useAuth} from '../../core/onboarding/hooks/useAuth';
+import { useCurrentUser } from '../../core/onboarding';
+import { useAuth } from '../../core/onboarding/hooks/useAuth';
 import {
   getUnixTimeStamp,
   getCurrentDateFormatted,
@@ -54,11 +54,11 @@ const data2 = [
 ];
 
 export const WorkOutScreen = memo(props => {
-  const {navigation} = props;
+  const { navigation } = props;
   const currentUser = useCurrentUser();
   const authManager = useAuth();
-  const {localized} = useTranslations();
-  const {theme, appearance} = useTheme();
+  const { localized } = useTranslations();
+  const { theme, appearance } = useTheme();
   const colorSet = theme.colors[appearance];
   const styles = dynamicStyles(theme, appearance);
   const iconPng = require('../../assets/icons/right-arrow.png');
@@ -99,6 +99,7 @@ export const WorkOutScreen = memo(props => {
           console.log(`1`, workoutScreenData[0].dishs[0].onNoti);
         } else {
           updateDeviceStorage.setStoreData('WorkoutScreenData', data2);
+          setWorkoutData(data2);
         }
       } catch (error) {
         console.log(error);
@@ -122,10 +123,10 @@ export const WorkOutScreen = memo(props => {
   } else {
     return (
       <ScrollView
-        style={{backgroundColor: colorSet.primaryBackground}}
+        style={{ backgroundColor: colorSet.primaryBackground }}
         showsVerticalScrollIndicator={false}>
         <View mt8>
-          <Text h2 style={{textAlign: 'center'}}>
+          <Text h2 style={{ textAlign: 'center' }}>
             {localized('Workout')}
           </Text>
         </View>
@@ -134,7 +135,7 @@ export const WorkOutScreen = memo(props => {
             showsCancelButton={false}
             placeholder={localized('Find Ingredients')}
             onChangeText={setText}
-            containerStyle={{height: Dimensions.get('window').height * 0.08}}
+            containerStyle={{ height: Dimensions.get('window').height * 0.08 }}
           />
         </View>
         <View mh5>

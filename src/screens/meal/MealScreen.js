@@ -250,11 +250,11 @@ export const MealScreen = memo(props => {
             />
           </React.Fragment>
         ))}
-        <View>
+        {/* <View>
           <NotifeeBtn
             containerStyles={{width: Dimensions.get('window') * 0.3}}
           />
-        </View>
+        </View> */}
       </ScrollView>
     );
   }
