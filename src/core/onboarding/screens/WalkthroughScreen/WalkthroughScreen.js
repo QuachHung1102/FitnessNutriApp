@@ -19,7 +19,7 @@ const WalkthroughScreen = () => {
   const slides = config.onboardingConfig.walkthroughScreens.map(
     (screenSpec, index) => {
       return {
-        key: index,
+        key: index.toString(),
         text: screenSpec.description,
         title: screenSpec.title,
         image: screenSpec.icon,
